@@ -10,16 +10,17 @@ import java.time.LocalDateTime;
 @Table(name = "tb_ids", schema = "rentaclassroom")
 public abstract class AbstractEntity {
     @Id
-    @Getter @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
     @Getter @Setter
     @Column(name = "cadastro", nullable = false)
     private LocalDateTime cadastro;
-    @Setter @Getter
+    @Getter @Setter
     @Column(name = "atualizacao", nullable = false)
     private LocalDateTime atualizacao;
-    @Setter @Getter
+    @Getter @Setter
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
 
