@@ -1,5 +1,9 @@
 package br.com.uniamerica.rentaclassroom.entitys;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "salas", schema = "public")
 public class Sala extends AbstractEntity {
