@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tb_ids", schema = "rentaclassroom")
+@MappedSuperclass
 public abstract class AbstractEntity {
     @Id
     @Getter
