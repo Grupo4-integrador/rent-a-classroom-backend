@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_agendamentos", schema = "rentaclassroom")
@@ -34,9 +35,19 @@ public class Agendamento extends AbstractEntity{
     @Column(name = "solicita_material", nullable = false)
     private boolean solicitaMaterial;
     @Getter @Setter
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Column(name = "selecao_material", nullable = false)
-    private SelecaoMaterial materiais;
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "tb_agendamento_materiais", schema = "rentaclassroom",
+            uniqueConstraints = @UniqueConstraint(
+                    columnNames = {
+                            "agendamento_id",
+                            "selecaomaterial_id"
+                    }
+            ),
+            joinColumns =    @JoinColumn(name = "agendamento_id"),
+            inverseJoinColumns = @JoinColumn(name = "selecaomaterial_id")
+    )
+
+    private List<SelecaoMaterial> materiais;
     @Getter @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao", nullable = false, length = 20)

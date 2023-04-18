@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_professor", schema = "rentaclassroom")
 public class Professor extends AbstractEntity{
@@ -18,6 +20,15 @@ public class Professor extends AbstractEntity{
     private String email;
     @Getter @Setter
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "turma", nullable = false)
-    private Turma turma;
+    @JoinTable(name = "tb_professor_turma", schema = "rentaclassroom",
+            uniqueConstraints = @UniqueConstraint(
+                    columnNames = {
+                            "professor_id",
+                            "turma_id"
+                    }
+            ),
+            joinColumns =    @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
+    private List<Turma> turmas;
 }

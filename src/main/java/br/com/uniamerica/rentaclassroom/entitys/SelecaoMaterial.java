@@ -11,7 +11,7 @@ public class SelecaoMaterial extends AbstractEntity {
     @Getter @Setter
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "tb_materiais", nullable = false)
-    private Material materiais;
+    private Material material;
     @Getter @Setter
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
