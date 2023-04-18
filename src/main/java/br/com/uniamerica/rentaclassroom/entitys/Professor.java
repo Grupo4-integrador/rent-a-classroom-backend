@@ -18,6 +18,8 @@ public class Professor extends AbstractEntity{
     @Getter @Setter
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
+    @Getter @Setter
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "tb_professor_turma", schema = "rentaclassroom",
             uniqueConstraints = @UniqueConstraint(
                     columnNames = {

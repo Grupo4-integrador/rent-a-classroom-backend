@@ -8,7 +8,7 @@ import lombok.Setter;
 @Table(name = "tb_selecao_material", schema = "rentaclassroom")
 public class SelecaoMaterial extends AbstractEntity {
     @Getter @Setter
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "material", nullable = false)
     private Material material;
     @Getter @Setter
