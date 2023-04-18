@@ -6,8 +6,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Table(name = "tb_material", schema = "rentaclassroom")
 public class Material extends AbstractEntity{

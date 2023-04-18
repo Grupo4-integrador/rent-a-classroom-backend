@@ -35,9 +35,18 @@ public class Agendamento extends AbstractEntity{
     @Column(name = "solicita_material", nullable = false)
     private boolean solicitaMaterial;
     @Getter @Setter
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "tb_selecao_material", nullable = false)
-    private List<SelecaoMaterial> selecaoMaterial;
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "tb_agendamento_materiais", schema = "rentaclassroom",
+            uniqueConstraints = @UniqueConstraint(
+                    columnNames = {
+                            "agendamento_id",
+                            "selecaomaterial_id"
+                    }
+            ),
+            joinColumns =    @JoinColumn(name = "agendamento_id"),
+            inverseJoinColumns = @JoinColumn(name = "selecaomaterial_id")
+    )
+    private List<SelecaoMaterial> materiais;
     @Getter @Setter
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "situacao", nullable = false)
