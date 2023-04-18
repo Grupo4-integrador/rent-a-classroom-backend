@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_professor", schema = "rentaclassroom")
 public class Professor extends AbstractEntity{
@@ -19,5 +21,5 @@ public class Professor extends AbstractEntity{
     @Getter @Setter
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "turma", nullable = false)
-    private Turma turma;
+    private List<Turma> turma;
 }
