@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_sala", schema = "rentaclassroom")
+@Table(name = "tb_salas", schema = "rentaclassroom")
 public class Sala extends AbstractEntity {
     @Getter @Setter
     @Column(name = "nome", nullable = false, unique = true)

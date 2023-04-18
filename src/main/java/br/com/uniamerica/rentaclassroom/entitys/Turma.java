@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_turma", schema = "rentaclassroom")
+@Table(name = "tb_turmas", schema = "rentaclassroom")
 public class Turma extends AbstractEntity{
     @Getter @Setter
     @Column(name = "curso", nullable = false, unique = true, length = 50)

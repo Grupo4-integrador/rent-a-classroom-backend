@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_agendamento", schema = "rentaclassroom")
+@Table(name = "tb_agendamentos", schema = "rentaclassroom")
 public class Agendamento extends AbstractEntity{
     @Getter @Setter
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -46,7 +46,7 @@ public class Agendamento extends AbstractEntity{
             joinColumns =    @JoinColumn(name = "agendamento_id"),
             inverseJoinColumns = @JoinColumn(name = "selecaomaterial_id")
     )
-    private List<SelecaoMaterial> materiais;
+    private List<SelecaoMaterial> selecaoMateriais;
     @Getter @Setter
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "situacao", nullable = false)

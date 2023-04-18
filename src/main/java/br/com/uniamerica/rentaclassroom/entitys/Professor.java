@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_professor", schema = "rentaclassroom")
+@Table(name = "tb_professores", schema = "rentaclassroom")
 public class Professor extends AbstractEntity{
     @Getter
     @Column(name = "ra", nullable = false, unique = true)
@@ -20,7 +20,7 @@ public class Professor extends AbstractEntity{
     private String email;
     @Getter @Setter
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "tb_professor_turma", schema = "rentaclassroom",
+    @JoinTable(name = "tb_professor_turmas", schema = "rentaclassroom",
             uniqueConstraints = @UniqueConstraint(
                     columnNames = {
                             "professor_id",
