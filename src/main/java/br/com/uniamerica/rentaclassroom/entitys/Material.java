@@ -8,8 +8,10 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tb_materiais", schema = "rentaclassroom")
-public class Material extends AbstractEntity{
-    @Getter @Setter
-    @Column(name = "nome", nullable = false, unique = true, length = 50)
-    private String nome;
+public class Material extends AbstractEntity {
+
+  @Getter
+  @Setter
+  @Column(name = "nome", nullable = false, unique = true, length = 50)
+  private String nome;
 }
