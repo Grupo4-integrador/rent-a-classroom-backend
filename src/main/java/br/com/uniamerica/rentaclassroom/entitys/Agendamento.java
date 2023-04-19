@@ -35,7 +35,7 @@ public class Agendamento extends AbstractEntity{
     private boolean solicitaMaterial;
     @Getter @Setter
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Column(name = "selecao_material", nullable = false)
+    @JoinColumn(name = "selecao_materiais_id", nullable = false)
     private SelecaoMaterial materiais;
     @Getter @Setter
     @Enumerated(EnumType.STRING)
