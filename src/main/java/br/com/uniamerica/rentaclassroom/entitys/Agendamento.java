@@ -26,31 +26,31 @@ public class Agendamento extends AbstractEntity {
   @JoinColumn(name = "ambiente", nullable = false)
   private Sala ambiente;
 
-  @Getter
-  @Setter
-  @Column(name = "data", nullable = false)
-  private LocalDateTime data;
+    @Getter
+    @Setter
+    @Column(name = "data", nullable = false)
+    private LocalDateTime data;
 
-  @Getter
-  @Setter
-  @Enumerated(EnumType.STRING)
-  @JoinColumn(name = "periodo", nullable = false)
-  private Periodo periodo;
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "periodo", nullable = false)
+    private Periodo periodo;
 
-  @Getter
-  @Setter
-  @Column(name = "hora_inicio", nullable = false)
-  private LocalDateTime horaInicio;
+    @Getter
+    @Setter
+    @Column(name = "hora_inicio", nullable = false)
+    private LocalDateTime horaInicio;
 
-  @Getter
-  @Setter
-  @Column(name = "hora_fim", nullable = false)
-  private LocalDateTime horaFim;
+    @Getter
+    @Setter
+    @Column(name = "hora_fim", nullable = false)
+    private LocalDateTime horaFim;
 
-  @Getter
-  @Setter
-  @Column(name = "solicita_material", nullable = false)
-  private boolean solicitaMaterial;
+    @Getter
+    @Setter
+    @Column(name = "solicita_material", nullable = false)
+    private boolean solicitaMaterial;
 
   @Getter
   @Setter
@@ -68,9 +68,9 @@ public class Agendamento extends AbstractEntity {
   )
   private List<SelecaoMaterial> selecaoMateriais;
 
-  @Getter
-  @Setter
-  @Enumerated(EnumType.STRING)
-  @JoinColumn(name = "situacao", nullable = false)
-  private Situacao situacao;
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "situacao", nullable = false)
+    private Situacao situacao;
 }
