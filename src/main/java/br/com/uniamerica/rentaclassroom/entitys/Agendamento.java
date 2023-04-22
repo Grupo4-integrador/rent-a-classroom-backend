@@ -12,12 +12,16 @@ public class Agendamento extends AbstractEntity {
 
   @Getter
   @Setter
+  @MapsId("professorId")
+  @EmbeddedId
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "professor", nullable = false)
   private Professor professor;
 
   @Getter
   @Setter
+  @MapsId("ambienteId")
+  @EmbeddedId
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "ambiente", nullable = false)
   private Sala ambiente;
@@ -50,15 +54,17 @@ public class Agendamento extends AbstractEntity {
 
   @Getter
   @Setter
+  @MapsId("selecaoMaterialId")
+  @EmbeddedId
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(
-    name = "tb_agendamento_materiais",
-    schema = "rentaclassroom",
-    uniqueConstraints = @UniqueConstraint(
-      columnNames = { "agendamento_id", "selecaomaterial_id" }
-    ),
-    joinColumns = @JoinColumn(name = "agendamento_id"),
-    inverseJoinColumns = @JoinColumn(name = "selecaomaterial_id")
+          name = "tb_agendamento_materiais",
+          schema = "rentaclassroom",
+          uniqueConstraints = @UniqueConstraint(
+                  columnNames = { "agendamento_id", "selecaomaterial_id" }
+          ),
+          joinColumns = @JoinColumn(name = "agendamento_id"),
+          inverseJoinColumns = @JoinColumn(name = "selecaomaterial_id")
   )
   private List<SelecaoMaterial> selecaoMateriais;
 
