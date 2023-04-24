@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Professor extends AbstractEntity {
 
   @Getter
-  @Column(name = "ra", nullable = false, unique = true)
+  @Column(name = "ra", unique = true)
   private Long ra;
 
   @Getter
