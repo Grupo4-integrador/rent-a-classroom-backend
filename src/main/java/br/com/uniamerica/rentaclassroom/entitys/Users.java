@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //import java.sql.*;
 //
 //public class UserDatabase {
@@ -72,7 +72,7 @@
 //    stmt.close();
 //  }
 //}
-=======
+
 // import java.sql.*;
 
 // public class UserDatabase {
@@ -146,4 +146,3 @@
 //     stmt.close();
 //   }
 // }
->>>>>>> f51cb247d5f3f4e9aeb0adc092558042e4357f54
