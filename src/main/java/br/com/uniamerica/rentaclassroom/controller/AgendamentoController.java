@@ -13,5 +13,5 @@ public class AgendamentoController {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
 
-    @GetMapping(value = "")
+    @GetMapping(/{})
 }
