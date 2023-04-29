@@ -2,7 +2,6 @@ package br.com.uniamerica.rentaclassroom.controller;
 
 import br.com.uniamerica.rentaclassroom.entitys.SelecaoMaterial;
 import br.com.uniamerica.rentaclassroom.repository.SelecaoMaterialRepository;
-import org.hibernate.engine.spi.Resolution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -46,9 +45,22 @@ public class SelecaoMaterialController {
         try{
             final SelecaoMaterial selecaoMaterialBanco = this.selecaoMaterialRepository.findById(id).orElse(null);
             if(selecaoMaterialBanco == null || !selecaoMaterialBanco.getId().equals(selecaoMaterial.getId())){
-                throw new RuntimeException("N")
+                throw new RuntimeException("Não foi possível identificar o registro informado");
             }
+            this.selecaoMaterialRepository.save(selecaoMaterialBanco);
+            return ResponseEntity.ok("Registro atualizado com sucesso");
+        }
+        catch (DataIntegrityViolationException e){
+            return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
+        }
+        catch (RuntimeException e){
+            return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
     }
-    //@DeleteMapping
+    @DeleteMapping
+    public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
+        final SelecaoMaterial selecaoMaterialBanco = this.selecaoMaterialRepository.findById(id).orElse(null);
+        this.selecaoMaterialRepository.delete(selecaoMaterialBanco);
+        return ResponseEntity.ok("Registro deletado com sucesso");
+    }
 }

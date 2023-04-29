@@ -10,7 +10,7 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "tb_professor", schema = "rentaclassroom")
-@AuditTable(value = "tb_professor_audit")
+@AuditTable(value = "tb_professor_audit", schema = "audit")
 public class Professor extends AbstractEntity {
 
   @Getter

@@ -12,7 +12,7 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "tb_turma", schema = "rentaclassroom")
-@AuditTable(value = "tb_turma_audit")
+@AuditTable(value = "tb_turma_audit", schema = "audit")
 public class Turma extends AbstractEntity {
 
   @Getter
