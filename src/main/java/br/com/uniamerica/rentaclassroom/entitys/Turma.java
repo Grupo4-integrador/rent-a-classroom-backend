@@ -6,9 +6,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 @Entity
-@Table(name = "tb_turmas", schema = "rentaclassroom")
+@Audited
+@Table(name = "tb_turma", schema = "rentaclassroom")
+@AuditTable(value = "tb_turma_audit")
 public class Turma extends AbstractEntity {
 
   @Getter

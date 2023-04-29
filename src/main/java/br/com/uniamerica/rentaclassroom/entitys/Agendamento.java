@@ -5,9 +5,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 @Entity
-@Table(name = "tb_agendamentos", schema = "rentaclassroom")
+@Audited
+@Table(name = "tb_agendamento", schema = "rentaclassroom")
+@AuditTable(value = "tb_agendamento_audit")
 public class Agendamento extends AbstractEntity {
 
   @Getter

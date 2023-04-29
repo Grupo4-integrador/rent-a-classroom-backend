@@ -3,9 +3,13 @@ package br.com.uniamerica.rentaclassroom.entitys;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 @Entity
-@Table(name = "tb_salas", schema = "rentaclassroom")
+@Audited
+@Table(name = "tb_sala", schema = "rentaclassroom")
+@AuditTable(value = "tb_sala_audit")
 public class Sala extends AbstractEntity {
 
   @Getter

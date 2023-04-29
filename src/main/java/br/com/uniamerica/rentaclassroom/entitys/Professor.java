@@ -4,9 +4,13 @@ import jakarta.persistence.*;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 
 @Entity
-@Table(name = "tb_professores", schema = "rentaclassroom")
+@Audited
+@Table(name = "tb_professor", schema = "rentaclassroom")
+@AuditTable(value = "tb_professor_audit")
 public class Professor extends AbstractEntity {
 
   @Getter
