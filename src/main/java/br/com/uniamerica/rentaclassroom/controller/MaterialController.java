@@ -1,18 +1,33 @@
 package br.com.uniamerica.rentaclassroom.controller;
 
+import br.com.uniamerica.rentaclassroom.entitys.Material;
 import br.com.uniamerica.rentaclassroom.repository.MaterialRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/api/material")
 public class MaterialController {
-    @Autowired
     private MaterialRepository materialRepository;
 
-    //@GetMapping("/{id}")
-    //@GetMapping
+    public MaterialController(MaterialRepository materialRepository) {
+        this.materialRepository = materialRepository;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findByIdPath(@PathVariable("id") final Long id) {
+        final Material material = this.materialRepository.findById(id).orElse(null);
+        return material == null ?
+                ResponseEntity.badRequest().body("Material não encontrado") : ResponseEntity.ok(material);
+    }
+
+    @GetMapping("/lista")
+    public ResponseEntity<?> listaCompleta() {
+        return ResponseEntity.ok(this.materialRepository.findAll());
+    }
     //@GetMapping
     //@PutMapping
     //@PostMapping
