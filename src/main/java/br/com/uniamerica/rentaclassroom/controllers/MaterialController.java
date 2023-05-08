@@ -1,15 +1,15 @@
-package br.com.uniamerica.rentaclassroom.controller;
+package br.com.uniamerica.rentaclassroom.controllers;
 
-import br.com.uniamerica.rentaclassroom.repository.TurmaRepository;
+import br.com.uniamerica.rentaclassroom.repositories.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/turma")
-public class TurmaController {
+@RequestMapping(value = "/api/material")
+public class MaterialController {
     @Autowired
-    private TurmaRepository turmaRepository;
+    private MaterialRepository materialRepository;
 
     //@GetMapping("/{id}")
     //@GetMapping

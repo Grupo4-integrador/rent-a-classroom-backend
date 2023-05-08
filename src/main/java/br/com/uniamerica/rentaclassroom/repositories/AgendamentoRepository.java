@@ -1,4 +1,4 @@
-package br.com.uniamerica.rentaclassroom.repository;
+package br.com.uniamerica.rentaclassroom.repositories;
 
 import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
 import org.springframework.data.jpa.repository.JpaRepository;

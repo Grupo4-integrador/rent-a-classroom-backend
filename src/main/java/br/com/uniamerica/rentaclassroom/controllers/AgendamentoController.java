@@ -1,7 +1,7 @@
-package br.com.uniamerica.rentaclassroom.controller;
+package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
-import br.com.uniamerica.rentaclassroom.repository.AgendamentoRepository;
+import br.com.uniamerica.rentaclassroom.repositories.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;

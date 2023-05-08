@@ -1,6 +1,6 @@
-package br.com.uniamerica.rentaclassroom.controller;
+package br.com.uniamerica.rentaclassroom.controllers;
 
-import br.com.uniamerica.rentaclassroom.repository.ProfessorRepository;
+import br.com.uniamerica.rentaclassroom.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
