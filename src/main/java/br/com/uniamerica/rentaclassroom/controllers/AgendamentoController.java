@@ -2,6 +2,7 @@ package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
 import br.com.uniamerica.rentaclassroom.repositories.AgendamentoRepository;
+import br.com.uniamerica.rentaclassroom.services.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class AgendamentoController {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
+    @Autowired
+    private AgendamentoService agendamentoService;
 
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
@@ -32,23 +35,18 @@ public class AgendamentoController {
     @PostMapping
     public ResponseEntity <?> cadastrar(@RequestBody final Agendamento agendamento){
         try{
-            this.agendamentoRepository.save(agendamento);
-            return ResponseEntity.ok("Registro realizado com sucesso");
+            this.agendamentoService.cadastraAgendamento(agendamento);
         }
-        catch (DataIntegrityViolationException e){
-            return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
+        catch (Exception e){
+            return ResponseEntity.badRequest().body("Erro " + e.getMessage());
         }
+        return ResponseEntity.ok("Registro realizado com sucesso");
     }
 
     @PutMapping
     public ResponseEntity <?> editar(@RequestParam("id") final Long id, @RequestBody final Agendamento agendamento){
         try{
-            final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
-            if(agendamentoBanco == null || !agendamentoBanco.getId().equals(agendamento.getId())){
-                throw new RuntimeException("Não foi possível identificar o registro informado");
-            }
-            this.agendamentoRepository.save(agendamentoBanco);
-            return ResponseEntity.ok("Registro atualizado com sucesso");
+            this.agendamentoService.atualizaAgendamento(id, agendamento);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
@@ -56,6 +54,7 @@ public class AgendamentoController {
         catch (RuntimeException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
+        return ResponseEntity.ok("Registro atualizado com sucesso");
     }
 
     @DeleteMapping
