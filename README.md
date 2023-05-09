@@ -1,11 +1,13 @@
 # Rent a classroom
 
+Rent a Classroom é um sistema de reservas de salas voltado para o uso interno do professores da Universidade UniAmérica
+
 ## 💻 Pré-requisitos
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Para iniciar, verifique se sua máquina atende aos seguintes requisitos:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-* Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
+* Você instalou a versão mais recente de `<Java / Postman>`
+* Você tem uma máquina `<Windows / Linux / Mac>`.
 * Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
 
 ## 🚀 Instalando Rent a Classroom
@@ -13,13 +15,14 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 Para instalar o Rent a Classroom, siga estas etapas:
 
 ```
-<comando_de_instalação>
+Acesse o terminal 
 ```
 
 ## 📚 Desenvolvido com
 
 O projeto foi construido utilizando as seguintes dependências:
 
+* Spring Security (https://docs.spring.io/spring-security/reference/index.html)
 * Lombok (https://projectlombok.org)
 
 
