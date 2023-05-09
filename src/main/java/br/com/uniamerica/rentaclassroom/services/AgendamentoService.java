@@ -13,28 +13,28 @@ public class AgendamentoService {
 
     @Transactional
     public void cadastraAgendamento(Agendamento agendamento){
-        if("".equals(agendamento.getProfessor())){
+        if(agendamento.getProfessor()==null){
             throw new RuntimeException("O campo professor não pode ser nulo");
         }
-        if("".equals(agendamento.getAmbiente())){
+        if(agendamento.getAmbiente()==null){
             throw new RuntimeException("O campo ambiente não pode ser nulo");
         }
-        if("".equals(agendamento.getData())){
+        if(agendamento.getData()==null){
             throw new RuntimeException("O campo data não pode ser nulo");
         }
-        if("".equals(agendamento.getPeriodo())){
-            throw new RuntimeException("O campo data não pode ser nulo");
+        if(agendamento.getPeriodo()==null){
+            throw new RuntimeException("O campo periodo não pode ser nulo");
         }
-        if("".equals(agendamento.getHoraInicio())){
+        if(agendamento.getHoraInicio()==null){
             throw new RuntimeException("O campo horaInicio não pode ser nulo");
         }
-        if("".equals(agendamento.getHoraFim())){
+        if(agendamento.getHoraFim()==null){
             throw new RuntimeException("O campo horaFim não pode ser nulo");
         }
-        if("".equals(agendamento.getSelecaoMateriais())){
+        if(agendamento.getSelecaoMateriais()==null){
             throw new RuntimeException("O campo selecaoMateriais não pode ser nulo");
         }
-        if("".equals(agendamento.getSituacao())){
+        if(agendamento.getSituacao()==null){
             throw new RuntimeException("O campo situacao não pode ser nulo");
         }
         this.agendamentoRepository.save(agendamento);
@@ -46,28 +46,28 @@ public class AgendamentoService {
         if(agendamentoBanco == null || !agendamentoBanco.getId().equals(agendamento.getId())){
             throw new RuntimeException("Não foi possível identificar o registro informado");
         }
-        if("".equals(agendamento.getProfessor())){
+        if(agendamento.getProfessor()==null){
             throw new RuntimeException("O campo professor não pode ser nulo");
         }
-        if("".equals(agendamento.getAmbiente())){
+        if(agendamento.getAmbiente()==null){
             throw new RuntimeException("O campo ambiente não pode ser nulo");
         }
-        if("".equals(agendamento.getData())){
+        if(agendamento.getData()==null){
             throw new RuntimeException("O campo data não pode ser nulo");
         }
-        if("".equals(agendamento.getPeriodo())){
-            throw new RuntimeException("O campo data não pode ser nulo");
+        if(agendamento.getPeriodo()==null){
+            throw new RuntimeException("O campo periodo não pode ser nulo");
         }
-        if("".equals(agendamento.getHoraInicio())){
+        if(agendamento.getHoraInicio()==null){
             throw new RuntimeException("O campo horaInicio não pode ser nulo");
         }
-        if("".equals(agendamento.getHoraFim())){
+        if(agendamento.getHoraFim()==null){
             throw new RuntimeException("O campo horaFim não pode ser nulo");
         }
-        if("".equals(agendamento.getSelecaoMateriais())){
+        if(agendamento.getSelecaoMateriais()==null){
             throw new RuntimeException("O campo selecaoMateriais não pode ser nulo");
         }
-        if("".equals(agendamento.getSituacao())){
+        if(agendamento.getSituacao()==null){
             throw new RuntimeException("O campo situacao não pode ser nulo");
         }
         this.agendamentoRepository.save(agendamento);
