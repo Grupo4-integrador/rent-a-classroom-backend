@@ -27,9 +27,4 @@ public class Sala extends AbstractEntity {
   @Enumerated(value = EnumType.STRING)
   @JoinColumn(name = "andar", nullable = false)
   private Andar andar;
-
-  @Getter
-  @Setter
-  @Column(name = "descricao", nullable = false)
-  private String descricao;
 }
