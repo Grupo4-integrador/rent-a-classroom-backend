@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor,Long> {
-    @Query("SELECT p FROM tb_professor p where ativo is true")
+    @Query("SELECT p FROM tb_professor p where p.ativo = true")
     List<Professor> findByAtivo();
     Professor findByRa(Long ra);
 }
