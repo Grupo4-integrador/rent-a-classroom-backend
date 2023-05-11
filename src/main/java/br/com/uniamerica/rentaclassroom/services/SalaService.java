@@ -20,6 +20,9 @@ public class SalaService {
         if ( salaRepository.findByNome(sala.getNome()) != null){
             throw new RuntimeException(" A sala que esta querendo inserir ja existe");
         }
+        if ( sala.getCapacidade() == 0 ){
+            throw new RuntimeException(" Deve inserir a capacidade da sala");
+        }
 
     }
 
