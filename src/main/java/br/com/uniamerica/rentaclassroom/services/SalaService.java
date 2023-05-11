@@ -39,6 +39,9 @@ public class SalaService {
         if( "".equals(sala.getNome())){
             throw new RuntimeException(" Deve inserir o nome da sala");
         }
+        if ( sala.getCapacidade() == 0 ){
+            throw new RuntimeException(" Deve inserir a capacidade da sala");
+        }
         this.salaRepository.save(sala);
     }
 
