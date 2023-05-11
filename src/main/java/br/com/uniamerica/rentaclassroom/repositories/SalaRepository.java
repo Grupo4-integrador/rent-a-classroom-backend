@@ -12,4 +12,6 @@ public interface SalaRepository extends JpaRepository<Sala, Long> {
 
     public List<Sala> findByAtivo(@Param("ativo") final boolean ativo);
 
+    public Sala findByNome(String nome);
+
 }

@@ -17,6 +17,7 @@ public class SalaService {
         if( "".equals(sala.getNome())){
             throw new RuntimeException(" Deve inserir o nome da sala");
         }
+
     }
 
     @Transactional
