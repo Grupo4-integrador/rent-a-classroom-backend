@@ -42,6 +42,9 @@ public class SalaService {
         if ( sala.getCapacidade() == 0 ){
             throw new RuntimeException(" Deve inserir a capacidade da sala");
         }
+        if ( "".equals(sala.getAndar())){
+            throw new RuntimeException(" Deve inserir o andar");
+        }
         this.salaRepository.save(sala);
     }
 
