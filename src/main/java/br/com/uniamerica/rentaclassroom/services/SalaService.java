@@ -36,6 +36,9 @@ public class SalaService {
         if(salaBanco == null || !salaBanco.getId().equals(sala.getId())){
             throw new RuntimeException("nao foi possivel identificar o registro informado.");
         }
+        if( "".equals(sala.getNome())){
+            throw new RuntimeException(" Deve inserir o nome da sala");
+        }
         this.salaRepository.save(sala);
     }
 
