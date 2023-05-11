@@ -30,9 +30,13 @@ public class SalaService {
     }
 
     @Transactional
-    public void atualizarSala(Sala sala){
+    public void atualizarSala(final Long id, Sala sala){
+        final Sala salaBanco = this.salaRepository.findById(id).orElse(null);
 
-
+        if(salaBanco == null || !salaBanco.getId().equals(sala.getId())){
+            throw new RuntimeException("nao foi possivel identificar o registro informado.");
+        }
+        this.salaRepository.save(sala);
     }
 
 }

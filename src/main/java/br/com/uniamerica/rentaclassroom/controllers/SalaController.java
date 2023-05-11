@@ -65,14 +65,7 @@ public class SalaController {
             @RequestBody final Sala sala
      ) {
         try {
-            final Sala salaBanco = this.salaRepository.findById(id).orElse(null);
-
-            if(salaBanco == null || !salaBanco.getId().equals(sala.getId())){
-                throw new RuntimeException("nao foi possivel identificar o registro informado.");
-            }
-
-            this.salaRepository.save(sala);
-            return ResponseEntity.ok().body("Registro atualizado com sucesso");
+            this.salaService.atualizarSala(id, sala);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("error" + e.getCause().getCause().getMessage());
@@ -80,6 +73,7 @@ public class SalaController {
         catch (RuntimeException e) {
             return ResponseEntity.internalServerError().body("error" + e.getMessage());
         }
+         return ResponseEntity.ok().body("Registro atualizado com sucesso");
      }
 
      @DeleteMapping
