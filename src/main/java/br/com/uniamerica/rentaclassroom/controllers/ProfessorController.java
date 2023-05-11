@@ -33,8 +33,7 @@ public class ProfessorController {
     public ResponseEntity<?> listaCompleta(){return ResponseEntity.ok(this.professorRepository.findAll());}
     @GetMapping("/ativo")
     public ResponseEntity<?> findByAtivo() {
-        List<Professor> professorList = professorRepository.findByAtivo();
-        return ResponseEntity.ok(professorList);
+        return ResponseEntity.ok(this.professorRepository.findByAtivo(true));
     }
 
     @PostMapping

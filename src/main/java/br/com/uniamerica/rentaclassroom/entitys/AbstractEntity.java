@@ -21,7 +21,7 @@ public abstract class AbstractEntity {
 
   @Getter
   @Setter
-  @Column(name = "atualizacao", nullable = false)
+  @Column(name = "atualizacao")
   private LocalDateTime atualizacao;
 
   @Getter

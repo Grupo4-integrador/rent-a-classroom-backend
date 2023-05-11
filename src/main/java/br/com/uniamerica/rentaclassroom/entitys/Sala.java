@@ -9,21 +9,18 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "tb_sala", schema = "rentaclassroom")
-@AuditTable(value = "tb_sala_audit", schema = "audit")
+// tirando error @AuditTable(value = "tb_sala_audit", schema = "audit")
 public class Sala extends AbstractEntity {
 
-  @Getter
-  @Setter
+  @Getter @Setter
   @Column(name = "nome", nullable = false, unique = true)
   private String nome;
 
-  @Getter
-  @Setter
+  @Getter @Setter
   @Column(name = "capacidade", nullable = false)
   private int capacidade;
 
-  @Getter
-  @Setter
+  @Getter @Setter
   @Enumerated(value = EnumType.STRING)
   @JoinColumn(name = "andar", nullable = false)
   private Andar andar;

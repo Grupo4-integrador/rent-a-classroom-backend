@@ -2,6 +2,7 @@ package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Sala;
 import br.com.uniamerica.rentaclassroom.repositories.SalaRepository;
+import br.com.uniamerica.rentaclassroom.services.SalaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,9 @@ public class SalaController {
 
     @Autowired
     private SalaRepository salaRepository;
+
+    @Autowired
+    private SalaService salaService;
 
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
@@ -47,12 +51,12 @@ public class SalaController {
             @RequestBody final Sala sala
      ) {
         try {
-            this.salaRepository.save(sala);
-            return ResponseEntity.ok().body("Registro realizado com sucesso");
+            this.salaService.cadastrarSala(sala);
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("error" + e.getMessage());
         }
+         return ResponseEntity.ok().body("Registro realizado com sucesso");
      }
 
      @PutMapping
