@@ -17,6 +17,9 @@ public class SalaService {
         if( "".equals(sala.getNome())){
             throw new RuntimeException(" Deve inserir o nome da sala");
         }
+        if ( salaRepository.findByNome(sala.getNome()) != null){
+            throw new RuntimeException(" A sala que esta querendo inserir ja existe");
+        }
 
     }
 
