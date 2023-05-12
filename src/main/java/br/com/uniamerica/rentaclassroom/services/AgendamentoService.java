@@ -34,6 +34,15 @@ public class AgendamentoService {
         if(agendamento.getAmbiente() == null){
             throw new RuntimeException("o campo ambiente não pode ser nulo");
         }
+        if(agendamento.getAmbiente().getNome() == null){
+            throw new RuntimeException("o campo nome do ambiente não pode ser nulo");
+        }
+        if(agendamento.getAmbiente().getCapacidade() == 0){
+            throw new RuntimeException("o campo capacidade do ambiente não pode ser igual a 0");
+        }
+        if(agendamento.getAmbiente().getAndar() == null){
+            throw new RuntimeException("o campo andar do ambiente não pode ser nulo");
+        }
         if(agendamento.getData() == null){
             throw new RuntimeException("o campo data não pode ser nulo");
         }
@@ -78,6 +87,15 @@ public class AgendamentoService {
         }
         if(agendamento.getAmbiente() == null){
             throw new RuntimeException("o campo ambiente não pode ser nulo");
+        }
+        if(agendamento.getAmbiente().getNome() == null){
+            throw new RuntimeException("o campo nome do ambiente não pode ser nulo");
+        }
+        if(agendamento.getAmbiente().getCapacidade() == 0){
+            throw new RuntimeException("o campo capacidade do ambiente não pode ser igual a 0");
+        }
+        if(agendamento.getAmbiente().getAndar() == null){
+            throw new RuntimeException("o campo andar do ambiente não pode ser nulo");
         }
         if(agendamento.getData() == null){
             throw new RuntimeException("o campo data não pode ser nulo");
