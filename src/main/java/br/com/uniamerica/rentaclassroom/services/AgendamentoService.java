@@ -23,19 +23,22 @@ public class AgendamentoService {
             throw new RuntimeException("o campo nome do professor não pode ser nulo");
         }
         if(agendamento.getProfessor().getNome().length() > 50){
-            throw new RuntimeException("o campo nome do professor não pode exceder exceder o máximo de caractéres (50)");
+            throw new RuntimeException("o campo nome do professor não pode exceder o máximo de caractéres (50)");
         }
         if(agendamento.getProfessor().getEmail() == null){
             throw new RuntimeException("o campo email do professor não pode ser nulo");
         }
         if(agendamento.getProfessor().getEmail().length() > 100){
-            throw new RuntimeException("o campo email do professor não pode exceder exceder o máximo de caractéres (100)");
+            throw new RuntimeException("o campo email do professor não pode exceder o máximo de caractéres (100)");
         }
         if(agendamento.getAmbiente() == null){
             throw new RuntimeException("o campo ambiente não pode ser nulo");
         }
         if(agendamento.getAmbiente().getNome() == null){
             throw new RuntimeException("o campo nome do ambiente não pode ser nulo");
+        }
+        if(agendamento.getAmbiente().getNome().length() > 50){
+            throw new RuntimeException("o campo nome do ambiente não pode exceder o máximo de caractéres (50)");
         }
         if(agendamento.getAmbiente().getCapacidade() == 0){
             throw new RuntimeException("o campo capacidade do ambiente não pode ser igual a 0");
@@ -77,19 +80,22 @@ public class AgendamentoService {
             throw new RuntimeException("o campo nome do professor não pode ser nulo");
         }
         if(agendamento.getProfessor().getNome().length() > 50){
-            throw new RuntimeException("o campo nome do professor não pode exceder exceder o máximo de caractéres (50)");
+            throw new RuntimeException("o campo nome do professor não pode exceder o máximo de caractéres (50)");
         }
         if(agendamento.getProfessor().getEmail() == null){
             throw new RuntimeException("o campo email do professor não pode ser nulo");
         }
         if(agendamento.getProfessor().getEmail().length() > 100){
-            throw new RuntimeException("o campo email do professor não pode exceder exceder o máximo de caractéres (100)");
+            throw new RuntimeException("o campo email do professor não pode exceder o máximo de caractéres (100)");
         }
         if(agendamento.getAmbiente() == null){
             throw new RuntimeException("o campo ambiente não pode ser nulo");
         }
         if(agendamento.getAmbiente().getNome() == null){
             throw new RuntimeException("o campo nome do ambiente não pode ser nulo");
+        }
+        if(agendamento.getAmbiente().getNome().length() > 50){
+            throw new RuntimeException("o campo nome do ambiente não pode exceder o máximo de caractéres (50)");
         }
         if(agendamento.getAmbiente().getCapacidade() == 0){
             throw new RuntimeException("o campo capacidade do ambiente não pode ser igual a 0");
