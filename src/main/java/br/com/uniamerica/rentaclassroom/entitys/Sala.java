@@ -13,7 +13,7 @@ import org.hibernate.envers.Audited;
 public class Sala extends AbstractEntity {
 
   @Getter @Setter
-  @Column(name = "nome", nullable = false, unique = true)
+  @Column(name = "nome", nullable = false, unique = true, length = 50)
   private String nome;
 
   @Getter @Setter
