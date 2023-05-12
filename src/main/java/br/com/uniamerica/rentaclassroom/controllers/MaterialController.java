@@ -28,7 +28,7 @@ public class MaterialController {
     public ResponseEntity<?> listaCompleta() {
         return ResponseEntity.ok(this.materialRepository.findAll());
     }
-    @GetMapping("/ativos")
+    @GetMapping("/ativo")
     public ResponseEntity<?> listaAtivos() {
         return ResponseEntity.ok(this.materialRepository.findByAtivo(true));
     }
