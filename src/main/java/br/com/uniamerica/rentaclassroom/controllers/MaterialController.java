@@ -2,19 +2,20 @@ package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.repositories.MaterialRepository;
 import br.com.uniamerica.rentaclassroom.entitys.Material;
+import br.com.uniamerica.rentaclassroom.services.MaterialService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/api/material")
 public class MaterialController {
     private MaterialRepository materialRepository;
+    private MaterialService materialService;
 
-    public MaterialController(MaterialRepository materialRepository) {
+    public MaterialController(MaterialRepository materialRepository, MaterialService materialService) {
         this.materialRepository = materialRepository;
+        this.materialService = materialService;
     }
 
     @GetMapping("/{id}")
@@ -32,7 +33,16 @@ public class MaterialController {
     public ResponseEntity<?> listaAtivos() {
         return ResponseEntity.ok(this.materialRepository.findByAtivo(true));
     }
-    //@PutMapping
-    //@PostMapping
+
+    @PostMapping
+    public ResponseEntity<?> createMaterial(@RequestBody final Material material) {
+        try {
+            this.materialService.createMaterial(material);
+            return ResponseEntity.ok("Registro cadastrado com sucesso");
+        }
+        catch (Exception error) {
+            return ResponseEntity.internalServerError().body("Error: g" + error.getMessage());
+        }
+    }
     //@DeleteMapping    Publica ou privada
 }
