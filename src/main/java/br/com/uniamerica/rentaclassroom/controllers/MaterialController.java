@@ -41,7 +41,7 @@ public class MaterialController {
             return ResponseEntity.ok("Registro cadastrado com sucesso");
         }
         catch (Exception error) {
-            return ResponseEntity.internalServerError().body("Error: g" + error.getMessage());
+            return ResponseEntity.internalServerError().body("Error: " + error.getMessage());
         }
     }
     //@DeleteMapping    Publica ou privada
