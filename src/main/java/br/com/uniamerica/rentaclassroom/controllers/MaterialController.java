@@ -3,6 +3,7 @@ package br.com.uniamerica.rentaclassroom.controllers;
 import br.com.uniamerica.rentaclassroom.repositories.MaterialRepository;
 import br.com.uniamerica.rentaclassroom.entitys.Material;
 import br.com.uniamerica.rentaclassroom.services.MaterialService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,24 @@ public class MaterialController {
             return ResponseEntity.internalServerError().body("Error: g" + error.getMessage());
         }
     }
-    //@DeleteMapping    Publica ou privada
+
+    @PutMapping
+    public ResponseEntity<?> updateMaterial(@RequestParam("id") final Long id, @RequestBody Material material) {
+        try {
+            this.materialService.updateMaterial(id, material);
+            return ResponseEntity.ok("Registro editado com sucesso");
+        }
+        catch (DataIntegrityViolationException error) {
+            return ResponseEntity.internalServerError().body("Error: " + error.getCause().getCause().getMessage());
+        }
+        catch (RuntimeException error) {
+            return ResponseEntity.internalServerError().body("Error: " + error.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMaterial(@PathVariable("id") final Long id) {
+        this.materialService.deleteMaterial(id);
+        return ResponseEntity.ok("Registro deletado com sucesso");
+    }
 }
