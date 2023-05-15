@@ -6,9 +6,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 @Service
 public class MaterialService {
-    private MaterialRepository materialRepository;
+    final MaterialRepository materialRepository;
 
     public MaterialService(MaterialRepository materialRepository) {
         this.materialRepository = materialRepository;
@@ -20,6 +22,13 @@ public class MaterialService {
                 "O nome do material não pode ser nulo");
         Assert.isTrue(material.getNome().length() < 50,
                 "O nome do material deve conter no máximo 50 caractéres");
+
+        List<Material> databaseMateriais = this.materialRepository.findAll();
+        for (Material databaseMaterial : databaseMateriais) {
+            Assert.isTrue(!material.getNome().equals(databaseMaterial.getNome()),
+                    "Esse material já existe nos registros");
+        }
+
         this.materialRepository.save(material);
     }
 
@@ -34,6 +43,12 @@ public class MaterialService {
                 "O nome do material não pode ser nulo");
         Assert.isTrue(material.getNome().length() < 50,
                 "O nome do material deve conter no máximo 50 caractéres");
+
+        List<Material> databaseMateriais = this.materialRepository.findAll();
+        for (Material databaseMaterialUpdate : databaseMateriais) {
+            Assert.isTrue(!material.getNome().equals(databaseMaterialUpdate.getNome()),
+                    "Esse material já existe nos registros");
+        }
 
         this.materialRepository.save(material);
     }
