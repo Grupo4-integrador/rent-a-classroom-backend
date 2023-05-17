@@ -13,9 +13,6 @@ public class AgendamentoService {
 
     @Transactional
     public void cadastraAgendamento(Agendamento agendamento){
-        if(agendamento.getProfessor() == null){
-            throw new RuntimeException("o campo professor não pode ser nulo");
-        }
         if(agendamento.getProfessor().getRa() == null){
             throw new RuntimeException("o campo ra do professor não pode ser nulo");
         }
@@ -31,9 +28,6 @@ public class AgendamentoService {
         if(agendamento.getProfessor().getEmail().length() > 100){
             throw new RuntimeException("o campo email do professor não pode exceder o máximo de caractéres (100)");
         }
-        if(agendamento.getAmbiente() == null){
-            throw new RuntimeException("o campo ambiente não pode ser nulo");
-        }
         if(agendamento.getAmbiente().getNome() == null){
             throw new RuntimeException("o campo nome do ambiente não pode ser nulo");
         }
@@ -45,21 +39,6 @@ public class AgendamentoService {
         }
         if(agendamento.getAmbiente().getAndar() == null){
             throw new RuntimeException("o campo andar do ambiente não pode ser nulo");
-        }
-        if(agendamento.getData() == null){
-            throw new RuntimeException("o campo data não pode ser nulo");
-        }
-        if(agendamento.getPeriodo() == null){
-            throw new RuntimeException("o campo periodo não pode ser nulo");
-        }
-        if(agendamento.getHoraInicio() == null){
-            throw new RuntimeException("o campo horaInicio não pode ser nulo");
-        }
-        if(agendamento.getHoraFim() == null){
-            throw new RuntimeException("o campo horaFim não pode ser nulo");
-        }
-        if(agendamento.getSituacao() == null){
-            throw new RuntimeException("o campo situacao não pode ser nulo");
         }
         this.agendamentoRepository.save(agendamento);
     }
@@ -70,9 +49,6 @@ public class AgendamentoService {
         if(agendamentoBanco == null || !agendamentoBanco.getId().equals(agendamento.getId())){
             throw new RuntimeException("não foi possível identificar o registro informado");
         }
-        if(agendamento.getProfessor() == null){
-            throw new RuntimeException("o campo professor não pode ser nulo");
-        }
         if(agendamento.getProfessor().getRa() == null){
             throw new RuntimeException("o campo ra do professor não pode ser nulo");
         }
@@ -88,9 +64,6 @@ public class AgendamentoService {
         if(agendamento.getProfessor().getEmail().length() > 100){
             throw new RuntimeException("o campo email do professor não pode exceder o máximo de caractéres (100)");
         }
-        if(agendamento.getAmbiente() == null){
-            throw new RuntimeException("o campo ambiente não pode ser nulo");
-        }
         if(agendamento.getAmbiente().getNome() == null){
             throw new RuntimeException("o campo nome do ambiente não pode ser nulo");
         }
@@ -102,21 +75,6 @@ public class AgendamentoService {
         }
         if(agendamento.getAmbiente().getAndar() == null){
             throw new RuntimeException("o campo andar do ambiente não pode ser nulo");
-        }
-        if(agendamento.getData() == null){
-            throw new RuntimeException("o campo data não pode ser nulo");
-        }
-        if(agendamento.getPeriodo() == null){
-            throw new RuntimeException("o campo periodo não pode ser nulo");
-        }
-        if(agendamento.getHoraInicio() == null){
-            throw new RuntimeException("o campo horaInicio não pode ser nulo");
-        }
-        if(agendamento.getHoraFim() == null){
-            throw new RuntimeException("o campo horaFim não pode ser nulo");
-        }
-        if(agendamento.getSituacao() == null){
-            throw new RuntimeException("o campo situacao não pode ser nulo");
         }
         this.agendamentoRepository.save(agendamento);
     }
