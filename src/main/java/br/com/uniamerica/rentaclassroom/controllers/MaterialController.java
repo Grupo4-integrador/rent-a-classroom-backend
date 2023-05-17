@@ -2,19 +2,21 @@ package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.repositories.MaterialRepository;
 import br.com.uniamerica.rentaclassroom.entitys.Material;
+import br.com.uniamerica.rentaclassroom.services.MaterialService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/api/material")
 public class MaterialController {
     private MaterialRepository materialRepository;
+    private MaterialService materialService;
 
-    public MaterialController(MaterialRepository materialRepository) {
+    public MaterialController(MaterialRepository materialRepository, MaterialService materialService) {
         this.materialRepository = materialRepository;
+        this.materialService = materialService;
     }
 
     @GetMapping("/{id}")
@@ -28,11 +30,39 @@ public class MaterialController {
     public ResponseEntity<?> listaCompleta() {
         return ResponseEntity.ok(this.materialRepository.findAll());
     }
-    @GetMapping("/ativos")
+    @GetMapping("/ativo")
     public ResponseEntity<?> listaAtivos() {
         return ResponseEntity.ok(this.materialRepository.findByAtivo(true));
     }
-    //@PutMapping
-    //@PostMapping
-    //@DeleteMapping    Publica ou privada
+
+    @PostMapping
+    public ResponseEntity<?> createMaterial(@RequestBody final Material material) {
+        try {
+            this.materialService.createMaterial(material);
+            return ResponseEntity.ok("Registro cadastrado com sucesso");
+        }
+        catch (Exception error) {
+            return ResponseEntity.internalServerError().body("Error: " + error.getMessage());
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateMaterial(@RequestParam("id") final Long id, @RequestBody Material material) {
+        try {
+            this.materialService.updateMaterial(id, material);
+            return ResponseEntity.ok("Registro editado com sucesso");
+        }
+        catch (DataIntegrityViolationException error) {
+            return ResponseEntity.internalServerError().body("Error: " + error.getCause().getCause().getMessage());
+        }
+        catch (RuntimeException error) {
+            return ResponseEntity.internalServerError().body("Error: " + error.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMaterial(@PathVariable("id") final Long id) {
+        this.materialService.deleteMaterial(id);
+        return ResponseEntity.ok("Registro deletado com sucesso");
+    }
 }

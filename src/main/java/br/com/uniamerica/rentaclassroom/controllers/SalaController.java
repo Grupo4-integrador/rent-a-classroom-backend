@@ -41,7 +41,7 @@ public class SalaController {
     }
 
 
-     @GetMapping("ativo")
+     @GetMapping("/ativo")
     public ResponseEntity<?> findByAtivo(){
         return ResponseEntity.ok(this.salaRepository.findByAtivo(true));
      }

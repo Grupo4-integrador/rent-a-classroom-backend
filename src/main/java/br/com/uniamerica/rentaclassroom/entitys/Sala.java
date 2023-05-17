@@ -9,7 +9,7 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "tb_sala", schema = "rentaclassroom")
-// tirando error @AuditTable(value = "tb_sala_audit", schema = "audit")
+@AuditTable(value = "tb_sala_audit", schema = "audit")
 public class Sala extends AbstractEntity {
 
   @Getter @Setter
