@@ -20,13 +20,7 @@ public class MaterialService {
     // Método que válida a inserção de um novo material no banco de dados.
     @Transactional
     public void createMaterial(final Material material) {
-        // Validação de nullable: valida se o nome do material não é nulo.
-        Assert.isTrue(material.getNome().length() > 0,
-                "O nome do material não pode ser nulo");
-
-        // Validação de length: valida se o tamanho do nome do material possui menos que 50  caractéres.
-        Assert.isTrue(material.getNome().length() < 50,
-                "O nome do material deve conter no máximo 50 caractéres");
+        // Validações de nullable e length estão na entidade Material e são feitas pela anotação @Size
 
         // Validação de unique: valida se o nome do material não existe não banco de dados antes de salva-lô.
         List<Material> databaseMateriais = this.materialRepository.findAll();

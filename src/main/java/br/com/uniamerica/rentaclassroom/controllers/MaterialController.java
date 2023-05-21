@@ -6,6 +6,7 @@ import br.com.uniamerica.rentaclassroom.services.MaterialService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -36,7 +37,7 @@ public class MaterialController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createMaterial(@RequestBody final Material material) {
+    public ResponseEntity<?> createMaterial(@RequestBody @Validated final Material material) {
         try {
             this.materialService.createMaterial(material);
             return ResponseEntity.ok("Registro cadastrado com sucesso");
