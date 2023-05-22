@@ -48,7 +48,7 @@ public class MaterialController {
     }
 
     @PutMapping
-    public ResponseEntity<?> updateMaterial(@RequestParam("id") final Long id, @RequestBody Material material) {
+    public ResponseEntity<?> updateMaterial(@RequestParam("id") final Long id, @RequestBody @Validated Material material) {
         try {
             this.materialService.updateMaterial(id, material);
             return ResponseEntity.ok("Registro editado com sucesso");

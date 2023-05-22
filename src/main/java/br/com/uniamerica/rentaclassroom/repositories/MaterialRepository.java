@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface MaterialRepository extends JpaRepository<Material, Long> {
     public List<Material> findByAtivo(@Param("ativo") final boolean ativo);
+    public Material findByNome(String nome);
 }
