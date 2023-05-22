@@ -37,7 +37,14 @@ public class MaterialService {
             throw new RuntimeException("Registro não encontrado");
         }
 
+        // Validações de nullable e length estão na entidade Material e são feitas pela anotação @Size
+
         // Validação de unique: valida se o nome do material não existe não banco de dados antes de atualiza-lô.
+        databaseMaterial = this.materialRepository.findByNome(material.getNome());
+        if (databaseMaterial.getId() != material.getId()) {
+            Assert.isTrue(!databaseMaterial.getNome().equals(material.getNome()),
+                    "Esse nome de material já existe nos registros");
+        }
 
         this.materialRepository.save(material);
     }
