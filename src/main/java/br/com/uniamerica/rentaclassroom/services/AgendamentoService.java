@@ -35,7 +35,7 @@ public class AgendamentoService {
     public void atualizaAgendamento(final Long id, Agendamento agendamento){
         final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
         if(agendamentoBanco == null || !agendamentoBanco.getId().equals(agendamento.getId())){
-            throw new RuntimeException("não foi possível identificar o registro informado");
+            throw new RuntimeException("registro não encontrado");
         }
         if(agendamento.getProfessor() == null){
             throw new RuntimeException("o campo professor não pode ser nulo");
@@ -53,5 +53,14 @@ public class AgendamentoService {
             throw new RuntimeException("o campo horaInicio não pode ser nulo");
         }
         this.agendamentoRepository.save(agendamento);
+    }
+
+    @Transactional
+    public void deletaAgendamento(final Long id){
+        final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
+        if(agendamentoBanco == null || !agendamentoBanco.getId().equals(id)){
+            throw new RuntimeException("registro não encontrada");
+        }
+        this.agendamentoRepository.deleteById(id);
     }
 }

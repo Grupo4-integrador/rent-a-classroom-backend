@@ -20,13 +20,13 @@ public class AgendamentoController {
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
         final Agendamento agendamento = this.agendamentoRepository.findById(id).orElse(null);
-        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum valor foi encontrado") : ResponseEntity.ok(agendamento);
+        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
     }
 
     @GetMapping
     public ResponseEntity <?> findByIdRequest(@RequestParam("id") final Long id){
         final Agendamento agendamento = this.agendamentoRepository.findById(id).orElse(null);
-        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum valor foi encontrado") : ResponseEntity.ok(agendamento);
+        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
     }
 
     @GetMapping("/lista")
@@ -57,10 +57,9 @@ public class AgendamentoController {
         return ResponseEntity.ok("Registro atualizado com sucesso");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
-        final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
-        this.agendamentoRepository.delete(agendamentoBanco);
+        this.agendamentoService.deletaAgendamento(id);
         return ResponseEntity.ok("Registro deletado com sucesso");
     }
 }
