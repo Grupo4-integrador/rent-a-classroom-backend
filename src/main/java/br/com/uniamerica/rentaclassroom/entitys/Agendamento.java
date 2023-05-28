@@ -12,40 +12,34 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Audited
-@Table(name = "tb_agendamento", schema = "rentaclassroom")
-@AuditTable(value = "tb_agendamento_audit", schema = "audit")
+@Table(name = "tb_agendamentos", schema = "rentaclassroom")
+@AuditTable(value = "tb_agendamentos_audit", schema = "audit")
 public class Agendamento extends AbstractEntity {
 
   @Getter @Setter
-  @NotNull(message = "o campo professor não pode ser nulo")
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name = "professor")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "professor", nullable = false)
   private Professor professor;
 
   @Getter @Setter
-  @NotNull(message = "o campo ambiente não pode ser nulo")
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name = "ambiente")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "ambiente", nullable = false)
   private Sala ambiente;
 
   @Getter @Setter
-  @NotNull(message = "o campo data não pode ser nulo")
-  @Column(name = "data")
+  @Column(name = "data", nullable = false)
   private LocalDateTime data;
 
   @Getter @Setter
-  @NotNull(message = "o campo periodo não pode ser nulo")
   @Enumerated(EnumType.STRING)
-  @JoinColumn(name = "periodo")
+  @JoinColumn(name = "periodo", nullable = false)
   private Periodo periodo;
 
   @Getter @Setter
-  @NotNull(message = "o campo horaInicio não pode ser nulo")
-  @Column(name = "hora_inicio")
+  @Column(name = "hora_inicio", nullable = false)
   private LocalDateTime horaInicio;
 
   @Getter @Setter
-  @NotNull(message = "o campo horaFim não pode ser nulo")
   @Column(name = "hora_fim")
   private LocalDateTime horaFim;
 
@@ -54,7 +48,7 @@ public class Agendamento extends AbstractEntity {
   private boolean solicitaMaterial;
 
   @Getter @Setter
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER)
   @JoinTable(
           name = "tb_agendamento_materiais",
           schema = "rentaclassroom",
@@ -67,8 +61,7 @@ public class Agendamento extends AbstractEntity {
   private List<SelecaoMaterial> selecaoMateriais;
 
   @Getter @Setter
-  @NotNull(message = "o campo situacao não pode ser nulo")
   @Enumerated(EnumType.STRING)
-  @JoinColumn(name = "situacao", nullable = false)
+  @JoinColumn(name = "situacao")
   private Situacao situacao;
 }
