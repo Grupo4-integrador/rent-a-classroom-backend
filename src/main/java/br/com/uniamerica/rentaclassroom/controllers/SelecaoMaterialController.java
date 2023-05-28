@@ -2,6 +2,7 @@ package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.SelecaoMaterial;
 import br.com.uniamerica.rentaclassroom.repositories.SelecaoMaterialRepository;
+import br.com.uniamerica.rentaclassroom.services.SelecaoMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class SelecaoMaterialController {
     @Autowired
     private SelecaoMaterialRepository selecaoMaterialRepository;
+    @Autowired
+    private SelecaoMaterialService selecaoMaterialService;
 
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
@@ -57,10 +60,9 @@ public class SelecaoMaterialController {
             return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
     }
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
-        final SelecaoMaterial selecaoMaterialBanco = this.selecaoMaterialRepository.findById(id).orElse(null);
-        this.selecaoMaterialRepository.delete(selecaoMaterialBanco);
+        this.selecaoMaterialService.deletaSelecaoMaterial(id);
         return ResponseEntity.ok("Registro deletado com sucesso");
     }
 }

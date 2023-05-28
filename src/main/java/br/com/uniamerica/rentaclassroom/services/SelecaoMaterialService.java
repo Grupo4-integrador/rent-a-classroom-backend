@@ -35,4 +35,13 @@ public class SelecaoMaterialService {
         }
         this.selecaoMaterialRepository.save(selecaoMaterial);
     }
+
+    @Transactional
+    public void deletaSelecaoMaterial(final Long id){
+        final SelecaoMaterial selecaoMaterialBanco = this.selecaoMaterialRepository.findById(id).orElse(null);
+        if(selecaoMaterialBanco == null || !selecaoMaterialBanco.getId().equals(id)){
+            throw new RuntimeException("registro não encontrado");
+        }
+        this.selecaoMaterialRepository.deleteById(id);
+    }
 }
