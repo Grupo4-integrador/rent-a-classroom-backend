@@ -27,6 +27,9 @@ public class SelecaoMaterialService {
         if(selecaoMaterialBanco == null || !selecaoMaterialBanco.getId().equals(selecaoMaterial.getId())){
             throw new RuntimeException("não foi possível identificar o registro informado");
         }
+        if(selecaoMaterial.getCadastro()==null || "".equals(selecaoMaterial.getCadastro())){
+            selecaoMaterial.setCadastro(selecaoMaterialRepository.findById(selecaoMaterial.getId()).get().getCadastro());
+        }
         if(selecaoMaterial.getMaterial() == null){
             throw new RuntimeException("o campo material não pode ser nulo");
         }

@@ -20,6 +20,9 @@ public class SalaService {
         if ( salaRepository.findByNome(sala.getNome()) != null){
             throw new RuntimeException(" A sala que esta querendo inserir ja existe");
         }
+        if(sala.getNome().length()>50 || sala.getNome().length()<4){
+            throw new RuntimeException("O tamanho de nome esta incorreto");
+        }
         if ( sala.getCapacidade() == 0 ){
             throw new RuntimeException(" Deve inserir a capacidade da sala");
         }
@@ -35,6 +38,9 @@ public class SalaService {
 
         if(salaBanco == null || !salaBanco.getId().equals(sala.getId())){
             throw new RuntimeException("nao foi possivel identificar o registro informado.");
+        }
+        if(sala.getCadastro()==null || "".equals(sala.getCadastro())){
+            sala.setCadastro(salaRepository.findById(sala.getId()).get().getCadastro());
         }
         if( "".equals(sala.getNome())){
             throw new RuntimeException(" Deve inserir o nome da sala");

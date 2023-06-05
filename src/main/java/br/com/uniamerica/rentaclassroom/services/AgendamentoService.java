@@ -22,9 +22,6 @@ public class AgendamentoService {
 
     @Transactional
     public void cadastraAgendamento(Agendamento agendamento){
-        if(professorRepository.findById(agendamento.getProfessor().getId()).isEmpty()){
-            throw new RuntimeException("o id do professor inserido não existe");
-        }
         if(agendamento.getProfessor() == null){
             throw new RuntimeException("o campo professor não pode ser nulo");
         }
@@ -54,6 +51,9 @@ public class AgendamentoService {
         final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
         if(agendamentoBanco == null || !agendamentoBanco.getId().equals(agendamento.getId())){
             throw new RuntimeException("registro não encontrado");
+        }
+        if(agendamento.getCadastro()==null || "".equals(agendamento.getCadastro())){
+            agendamentoBanco.setCadastro(professorRepository.findById(agendamento.getId()).get().getCadastro());
         }
         if(professorRepository.findById(agendamento.getProfessor().getId()).isEmpty()){
             throw new RuntimeException("o id do professor inserido não existe");

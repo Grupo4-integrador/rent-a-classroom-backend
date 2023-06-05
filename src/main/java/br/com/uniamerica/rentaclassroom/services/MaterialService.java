@@ -36,6 +36,9 @@ public class MaterialService {
         if (databaseMaterial == null || !databaseMaterial.getId().equals(material.getId())) {
             throw new RuntimeException("Registro não encontrado");
         }
+        if(material.getCadastro()==null || "".equals(material.getCadastro())){
+            material.setCadastro(materialRepository.findById(material.getId()).get().getCadastro());
+        }
 
         // Validações de nullable e length estão na entidade Material e são feitas pela anotação @Size
 

@@ -25,8 +25,8 @@ public class ProfessorService {
         if(professor.getNome()==null){
             throw new RuntimeException("O nome do professor está vazio");
         }
-        if(professor.getNome().length()>50){
-            throw new RuntimeException("O nome do professor ultrapassou o limite (50 caracteres)");
+        if(professor.getNome().length()>50 || professor.getNome().length()<4){
+            throw new RuntimeException("O tamanho dp nome do professor esta invalido");
         }
         if(this.verificaMascara.email(professor.getEmail())==false){
             throw new RuntimeException("O email está invalido");
@@ -42,6 +42,9 @@ public class ProfessorService {
         if(professorBanco.getId()==null || professorBanco.getId().equals(professor.getId())){
             throw new RuntimeException("Não foi possivel encontrar o registro");
         }
+        if(professor.getCadastro()==null || "".equals(professor.getCadastro())){
+            professor.setCadastro(professorRepository.findById(professor.getId()).get().getCadastro());
+        }
         if(professor.getRa()==null){
             throw new RuntimeException("O RA do professor está vazio");
         }
@@ -51,8 +54,8 @@ public class ProfessorService {
         if(professor.getNome()==null){
             throw new RuntimeException("O nome do professor está vazio");
         }
-        if(professor.getNome().length()>50){
-            throw new RuntimeException("O nome do professor ultrapassou o limite (50 caracteres)");
+        if(professor.getNome().length()>50 || professor.getNome().length()<4){
+            throw new RuntimeException("O tamanho dp nome do professor esta invalido");
         }
         if(this.verificaMascara.email(professor.getEmail())==false){
             throw new RuntimeException("O email está invalido");
