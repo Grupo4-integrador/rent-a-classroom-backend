@@ -1,6 +1,7 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
+import br.com.uniamerica.rentaclassroom.entitys.Material;
 import br.com.uniamerica.rentaclassroom.repositories.AgendamentoRepository;
 import br.com.uniamerica.rentaclassroom.services.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +58,20 @@ public class AgendamentoController {
         return ResponseEntity.ok("Registro atualizado com sucesso");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
-        this.agendamentoService.deletaAgendamento(id);
-        return ResponseEntity.ok("Registro deletado com sucesso");
+        final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
+        try{
+            this.agendamentoRepository.delete(agendamentoBanco);
+        }
+        catch(RuntimeException e){
+            if(agendamentoBanco.isAtivo()) {
+                agendamentoBanco.setAtivo(false);
+                this.agendamentoRepository.save(agendamentoBanco);
+                return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
+            }
+            return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");
+        }
+        return ResponseEntity.ok("Registro deletado");
     }
 }

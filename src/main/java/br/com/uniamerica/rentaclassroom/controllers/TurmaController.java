@@ -20,6 +20,12 @@ public class TurmaController {
     @Autowired
     private TurmaService turmaService;
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
+        final Turma turma = this.turmaRepository.findById(id).orElse(null);
+        return turma == null ? ResponseEntity.badRequest().body("Nenhum valor foi encontrado") : ResponseEntity.ok(turma);
+    }
     @GetMapping
     public ResponseEntity<?> findByRequest(
             @RequestParam("id") final Long id

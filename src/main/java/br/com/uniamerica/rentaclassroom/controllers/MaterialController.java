@@ -1,5 +1,6 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
+import br.com.uniamerica.rentaclassroom.entitys.Sala;
 import br.com.uniamerica.rentaclassroom.repositories.MaterialRepository;
 import br.com.uniamerica.rentaclassroom.entitys.Material;
 import br.com.uniamerica.rentaclassroom.services.MaterialService;
@@ -61,9 +62,20 @@ public class MaterialController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMaterial(@PathVariable("id") final Long id) {
-        this.materialService.deleteMaterial(id);
-        return ResponseEntity.ok("Registro deletado com sucesso");
+    @DeleteMapping
+    public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
+        final Material materialBanco = this.materialRepository.findById(id).orElse(null);
+        try{
+            this.materialRepository.delete(materialBanco);
+        }
+        catch(RuntimeException e){
+            if(materialBanco.isAtivo()) {
+                materialBanco.setAtivo(false);
+                this.materialRepository.save(materialBanco);
+                return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
+            }
+            return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");
+        }
+        return ResponseEntity.ok("Registro deletado");
     }
 }
