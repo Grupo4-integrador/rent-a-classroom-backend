@@ -1,6 +1,7 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Sala;
+import br.com.uniamerica.rentaclassroom.entitys.Turma;
 import br.com.uniamerica.rentaclassroom.repositories.SalaRepository;
 import br.com.uniamerica.rentaclassroom.services.SalaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,13 +77,21 @@ public class SalaController {
          return ResponseEntity.ok().body("Registro atualizado com sucesso");
      }
 
-     @DeleteMapping
-    public ResponseEntity<?> excluir(
-            @RequestParam("id") final long id
-     ){
-        final Sala sala = this.salaRepository.findById(id).orElse(null);
-        this.salaRepository.delete(sala);
-        return ResponseEntity.ok().body("Registro deletado com sucesso");
-     }
+    @DeleteMapping
+    public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
+        final Sala salaBanco = this.salaRepository.findById(id).orElse(null);
+        try{
+            this.salaRepository.delete(salaBanco);
+        }
+        catch(RuntimeException e){
+            if(salaBanco.isAtivo()) {
+                salaBanco.setAtivo(false);
+                this.salaRepository.save(salaBanco);
+                return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
+            }
+            return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");
+        }
+        return ResponseEntity.ok("Registro deletado");
+    }
 
 }

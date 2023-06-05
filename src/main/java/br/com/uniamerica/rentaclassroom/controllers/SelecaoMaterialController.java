@@ -60,9 +60,5 @@ public class SelecaoMaterialController {
             return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
-        this.selecaoMaterialService.deletaSelecaoMaterial(id);
-        return ResponseEntity.ok("Registro deletado com sucesso");
-    }
+
 }
