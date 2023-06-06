@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/api/agendamento")
+@RequestMapping(value = "/api/data")
 public class DataController {
     @Autowired
     private DataRepository dataRepository;
@@ -21,22 +21,20 @@ public class DataController {
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
         final Data data = this.dataRepository.findById(id).orElse(null);
-        return data == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(data);
+        return data == null ? ResponseEntity.badRequest().body("nenhum registro foi encontrado") : ResponseEntity.ok(data);
     }
-
     @GetMapping
     public ResponseEntity <?> findByIdRequest(@RequestParam("id") final Long id){
         final Data data = this.dataRepository.findById(id).orElse(null);
-        return data == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(data);
+        return data == null ? ResponseEntity.badRequest().body("nenhum registro foi encontrado") : ResponseEntity.ok(data);
     }
-
     @GetMapping("/lista")
     public ResponseEntity <?> listaCompleta(){return ResponseEntity.ok(this.dataRepository.findAll());}
 
     @PostMapping
     public ResponseEntity <?> cadastrar(@RequestBody @Validated final Data data){
         try{
-            this.dataService.cadastrarData(data);
+            this.dataService.cadastraData(data);
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body("Erro " + e.getMessage());
@@ -47,7 +45,7 @@ public class DataController {
     @PutMapping
     public ResponseEntity <?> editar(@RequestParam("id") final Long id, @RequestBody @Validated final Data data){
         try{
-            this.dataService.atualizarData(id, data);
+            this.dataService.atualizaData(id, data);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
@@ -55,7 +53,7 @@ public class DataController {
         catch (RuntimeException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
-        return ResponseEntity.ok("Registro atualizado com sucesso");
+        return ResponseEntity.ok("Registro editado com sucesso");
     }
 
     @DeleteMapping
@@ -68,9 +66,9 @@ public class DataController {
             if(dataBanco.isAtivo()) {
                 dataBanco.setAtivo(false);
                 this.dataRepository.save(dataBanco);
-                return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
+                return ResponseEntity.internalServerError().body("flag desativada!");
             }
-            return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");
+            return ResponseEntity.internalServerError().body("a flag ja está desativada");
         }
         return ResponseEntity.ok("Registro deletado");
     }

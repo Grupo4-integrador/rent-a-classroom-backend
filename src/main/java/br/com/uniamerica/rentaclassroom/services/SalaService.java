@@ -13,7 +13,7 @@ public class SalaService {
     private SalaRepository salaRepository;
 
     @Transactional
-    public void cadastrarSala(Sala sala){
+    public void cadastraSala(Sala sala){
         if( "".equals(sala.getNome())){
             throw new RuntimeException(" Deve inserir o nome da sala");
         }
@@ -33,7 +33,7 @@ public class SalaService {
     }
 
     @Transactional
-    public void atualizarSala(final Long id, Sala sala){
+    public void atualizaSala(final Long id, Sala sala){
         final Sala salaBanco = this.salaRepository.findById(id).orElse(null);
 
         if(salaBanco == null || !salaBanco.getId().equals(sala.getId())){

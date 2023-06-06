@@ -12,7 +12,7 @@ public class DataService {
     private DataRepository dataRepository;
 
     @Transactional
-    public void cadastrarData(Data data){
+    public void cadastraData(Data data){
         if(data.getHoraInicio() == null){
             throw new RuntimeException("o campo horaInicio não pode ser nulo");
         }
@@ -23,7 +23,7 @@ public class DataService {
     }
 
     @Transactional
-    public void atualizarData(final Long id, Data data){
+    public void atualizaData(final Long id, Data data){
         final Data dataBanco = this.dataRepository.findById(id).orElse(null);
 
         if(dataBanco == null || !dataBanco.getId().equals(data.getId())){

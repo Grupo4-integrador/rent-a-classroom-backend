@@ -1,7 +1,6 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
-import br.com.uniamerica.rentaclassroom.entitys.Material;
 import br.com.uniamerica.rentaclassroom.repositories.AgendamentoRepository;
 import br.com.uniamerica.rentaclassroom.services.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +21,13 @@ public class AgendamentoController {
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
         final Agendamento agendamento = this.agendamentoRepository.findById(id).orElse(null);
-        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
+        return agendamento == null ? ResponseEntity.badRequest().body("nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
     }
-
     @GetMapping
     public ResponseEntity <?> findByIdRequest(@RequestParam("id") final Long id){
         final Agendamento agendamento = this.agendamentoRepository.findById(id).orElse(null);
-        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
+        return agendamento == null ? ResponseEntity.badRequest().body("nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
     }
-
     @GetMapping("/lista")
     public ResponseEntity <?> listaCompleta(){return ResponseEntity.ok(this.agendamentoRepository.findAll());}
 
@@ -56,7 +53,7 @@ public class AgendamentoController {
         catch (RuntimeException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
-        return ResponseEntity.ok("Registro atualizado com sucesso");
+        return ResponseEntity.ok("Registro editado com sucesso");
     }
 
     @DeleteMapping
@@ -69,9 +66,9 @@ public class AgendamentoController {
             if(agendamentoBanco.isAtivo()) {
                 agendamentoBanco.setAtivo(false);
                 this.agendamentoRepository.save(agendamentoBanco);
-                return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
+                return ResponseEntity.internalServerError().body("flag desativada!");
             }
-            return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");
+            return ResponseEntity.internalServerError().body("a flag ja está desativada");
         }
         return ResponseEntity.ok("Registro deletado");
     }

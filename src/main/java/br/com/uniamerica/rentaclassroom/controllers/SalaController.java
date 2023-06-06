@@ -1,58 +1,50 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
 import br.com.uniamerica.rentaclassroom.entitys.Sala;
-import br.com.uniamerica.rentaclassroom.entitys.Turma;
 import br.com.uniamerica.rentaclassroom.repositories.SalaRepository;
 import br.com.uniamerica.rentaclassroom.services.SalaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/api/sala")
 public class SalaController {
-
     @Autowired
     private SalaRepository salaRepository;
-
     @Autowired
     private SalaService salaService;
 
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
         final Sala sala = this.salaRepository.findById(id).orElse(null);
-        return sala == null ? ResponseEntity.badRequest().body("Nenhum valor foi encontrado") : ResponseEntity.ok(sala);
+        return sala == null ? ResponseEntity.badRequest().body("nenhum valor foi encontrado") : ResponseEntity.ok(sala);
     }
-
     @GetMapping
     public ResponseEntity<?> findByRequest(
             @RequestParam("id") final long id
     ) {
         final Sala sala = this.salaRepository.findById(id).orElse(null);
         return sala == null
-                ? ResponseEntity.badRequest().body("Nenhum valor foi encontrado")
+                ? ResponseEntity.badRequest().body("nenhum valor foi encontrado")
                 : ResponseEntity.ok(sala);
     }
-
     @GetMapping("/lista")
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(this.salaRepository.findAll());
     }
-
-
      @GetMapping("/ativo")
     public ResponseEntity<?> findByAtivo(){
         return ResponseEntity.ok(this.salaRepository.findByAtivo(true));
      }
 
      @PostMapping
-    public ResponseEntity<?> cadastar(
-            @RequestBody final Sala sala
-     ) {
+    public ResponseEntity<?> cadastar(@RequestBody @Validated final Sala sala) {
         try {
-            this.salaService.cadastrarSala(sala);
+            this.salaService.cadastraSala(sala);
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("error" + e.getMessage());
@@ -61,12 +53,9 @@ public class SalaController {
      }
 
      @PutMapping
-    public ResponseEntity<?> atualizar(
-            @RequestParam("id") final long id,
-            @RequestBody final Sala sala
-     ) {
+    public ResponseEntity<?> editar(@RequestParam("id") final long id, @RequestBody @Validated final Sala sala) {
         try {
-            this.salaService.atualizarSala(id, sala);
+            this.salaService.atualizaSala(id, sala);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("error" + e.getCause().getCause().getMessage());
@@ -74,7 +63,7 @@ public class SalaController {
         catch (RuntimeException e) {
             return ResponseEntity.internalServerError().body("error" + e.getMessage());
         }
-         return ResponseEntity.ok().body("Registro atualizado com sucesso");
+         return ResponseEntity.ok().body("Registro editar com sucesso");
      }
 
     @DeleteMapping
@@ -87,9 +76,9 @@ public class SalaController {
             if(salaBanco.isAtivo()) {
                 salaBanco.setAtivo(false);
                 this.salaRepository.save(salaBanco);
-                return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
+                return ResponseEntity.internalServerError().body("flag desativada!");
             }
-            return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");
+            return ResponseEntity.internalServerError().body("a flag ja está desativada");
         }
         return ResponseEntity.ok("Registro deletado");
     }

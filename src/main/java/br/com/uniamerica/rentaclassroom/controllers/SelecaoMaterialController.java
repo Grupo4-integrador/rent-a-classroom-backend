@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -20,38 +21,31 @@ public class SelecaoMaterialController {
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
         final SelecaoMaterial selecaoMaterial = this.selecaoMaterialRepository.findById(id).orElse(null);
-        return selecaoMaterial == null ? ResponseEntity.badRequest().body("Nenhum valor encontrado") : ResponseEntity.ok(selecaoMaterial);
+        return selecaoMaterial == null ? ResponseEntity.badRequest().body("nenhum valor encontrado") : ResponseEntity.ok(selecaoMaterial);
     }
-
     @GetMapping
     public ResponseEntity <?> findByIdRequest(@RequestParam("id") final Long id){
         final SelecaoMaterial selecaoMaterial = this.selecaoMaterialRepository.findById(id).orElse(null);
-        return selecaoMaterial == null ? ResponseEntity.badRequest().body("Nenhum valor encontrado") : ResponseEntity.ok(selecaoMaterial);
+        return selecaoMaterial == null ? ResponseEntity.badRequest().body("nenhum valor encontrado") : ResponseEntity.ok(selecaoMaterial);
     }
-
     @GetMapping("/lista")
     public ResponseEntity <?> listaCompleta(){return ResponseEntity.ok(this.selecaoMaterialRepository.findAll());}
 
     @PostMapping
-    public ResponseEntity <?> cadastrar(@RequestBody final SelecaoMaterial selecaoMaterial){
+    public ResponseEntity <?> cadastrar(@RequestBody @Validated final SelecaoMaterial selecaoMaterial){
         try{
-            this.selecaoMaterialRepository.save(selecaoMaterial);
-            return ResponseEntity.ok("Registro realizado com sucesso");
+            this.selecaoMaterialService.cadastraSelecaoMaterial(selecaoMaterial);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
         }
+        return ResponseEntity.ok("Registro realizado com sucesso");
     }
 
     @PutMapping
-    public ResponseEntity <?> editar(@RequestParam("id") final Long id, @RequestBody final SelecaoMaterial selecaoMaterial){
+    public ResponseEntity <?> editar(@RequestParam("id") final Long id, @RequestBody @Validated final SelecaoMaterial selecaoMaterial){
         try{
-            final SelecaoMaterial selecaoMaterialBanco = this.selecaoMaterialRepository.findById(id).orElse(null);
-            if(selecaoMaterialBanco == null || !selecaoMaterialBanco.getId().equals(selecaoMaterial.getId())){
-                throw new RuntimeException("Não foi possível identificar o registro informado");
-            }
-            this.selecaoMaterialRepository.save(selecaoMaterialBanco);
-            return ResponseEntity.ok("Registro atualizado com sucesso");
+            this.selecaoMaterialService.atualizaSelecaoMaterial(id, selecaoMaterial);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
@@ -59,6 +53,7 @@ public class SelecaoMaterialController {
         catch (RuntimeException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getMessage());
         }
+        return ResponseEntity.ok("Registro editado com sucesso");
     }
 
 }
