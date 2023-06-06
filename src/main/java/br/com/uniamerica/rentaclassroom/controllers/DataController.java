@@ -1,9 +1,8 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
-import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
-import br.com.uniamerica.rentaclassroom.entitys.Material;
-import br.com.uniamerica.rentaclassroom.repositories.AgendamentoRepository;
-import br.com.uniamerica.rentaclassroom.services.AgendamentoService;
+import br.com.uniamerica.rentaclassroom.entitys.Data;
+import br.com.uniamerica.rentaclassroom.repositories.DataRepository;
+import br.com.uniamerica.rentaclassroom.services.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -13,31 +12,31 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/api/agendamento")
-public class AgendamentoController {
+public class DataController {
     @Autowired
-    private AgendamentoRepository agendamentoRepository;
+    private DataRepository dataRepository;
     @Autowired
-    private AgendamentoService agendamentoService;
+    private DataService dataService;
 
     @GetMapping("/{id}")
     public ResponseEntity <?> findByIdPath(@PathVariable("id") final Long id){
-        final Agendamento agendamento = this.agendamentoRepository.findById(id).orElse(null);
-        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
+        final Data data = this.dataRepository.findById(id).orElse(null);
+        return data == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(data);
     }
 
     @GetMapping
     public ResponseEntity <?> findByIdRequest(@RequestParam("id") final Long id){
-        final Agendamento agendamento = this.agendamentoRepository.findById(id).orElse(null);
-        return agendamento == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(agendamento);
+        final Data data = this.dataRepository.findById(id).orElse(null);
+        return data == null ? ResponseEntity.badRequest().body("Nenhum registro foi encontrado") : ResponseEntity.ok(data);
     }
 
     @GetMapping("/lista")
-    public ResponseEntity <?> listaCompleta(){return ResponseEntity.ok(this.agendamentoRepository.findAll());}
+    public ResponseEntity <?> listaCompleta(){return ResponseEntity.ok(this.dataRepository.findAll());}
 
     @PostMapping
-    public ResponseEntity <?> cadastrar(@RequestBody @Validated final Agendamento agendamento){
+    public ResponseEntity <?> cadastrar(@RequestBody @Validated final Data data){
         try{
-            this.agendamentoService.cadastraAgendamento(agendamento);
+            this.dataService.cadastrarData(data);
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body("Erro " + e.getMessage());
@@ -46,9 +45,9 @@ public class AgendamentoController {
     }
 
     @PutMapping
-    public ResponseEntity <?> editar(@RequestParam("id") final Long id, @RequestBody @Validated final Agendamento agendamento){
+    public ResponseEntity <?> editar(@RequestParam("id") final Long id, @RequestBody @Validated final Data data){
         try{
-            this.agendamentoService.atualizaAgendamento(id, agendamento);
+            this.dataService.atualizarData(id, data);
         }
         catch (DataIntegrityViolationException e){
             return ResponseEntity.internalServerError().body("Erro " + e.getCause().getCause().getMessage());
@@ -61,14 +60,14 @@ public class AgendamentoController {
 
     @DeleteMapping
     public ResponseEntity <?> deletar(@RequestParam("id") final Long id){
-        final Agendamento agendamentoBanco = this.agendamentoRepository.findById(id).orElse(null);
+        final Data dataBanco = this.dataRepository.findById(id).orElse(null);
         try{
-            this.agendamentoRepository.delete(agendamentoBanco);
+            this.dataRepository.delete(dataBanco);
         }
         catch(RuntimeException e){
-            if(agendamentoBanco.isAtivo()) {
-                agendamentoBanco.setAtivo(false);
-                this.agendamentoRepository.save(agendamentoBanco);
+            if(dataBanco.isAtivo()) {
+                dataBanco.setAtivo(false);
+                this.dataRepository.save(dataBanco);
                 return ResponseEntity.internalServerError().body("Erro no delete, flag desativada!");
             }
             return ResponseEntity.internalServerError().body("Erro no delete, a flag ja está desativada");

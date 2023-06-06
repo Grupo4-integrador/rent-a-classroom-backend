@@ -37,12 +37,6 @@ public class AgendamentoService {
         if(agendamento.getPeriodo() == null){
             throw new RuntimeException("o campo período não pode ser nulo");
         }
-        if(agendamento.getHoraInicio() == null){
-            throw new RuntimeException("o campo horaInicio não pode ser nulo");
-        }
-        if(agendamento.getHoraFim() == null){
-            throw new RuntimeException("o campo horaFim não pode ser nulo");
-        }
         this.agendamentoRepository.save(agendamento);
     }
 
@@ -72,12 +66,6 @@ public class AgendamentoService {
         }
         if(agendamento.getPeriodo() == null){
             throw new RuntimeException("o campo período não pode ser nulo");
-        }
-        if(agendamento.getHoraInicio() == null){
-            throw new RuntimeException("o campo horaInicio não pode ser nulo");
-        }
-        if(agendamento.getHoraFim() == null){
-            throw new RuntimeException("o campo horaFim não pode ser nulo");
         }
         this.agendamentoRepository.save(agendamento);
     }

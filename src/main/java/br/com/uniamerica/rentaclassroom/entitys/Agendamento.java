@@ -28,20 +28,12 @@ public class Agendamento extends AbstractEntity {
 
   @Getter @Setter
   @Column(name = "data", nullable = false)
-  private LocalDateTime data;
+  private Data data;
 
   @Getter @Setter
   @Enumerated(EnumType.STRING)
   @JoinColumn(name = "periodo", nullable = false)
   private Periodo periodo;
-
-  @Getter @Setter
-  @Column(name = "hora_inicio", nullable = false)
-  private LocalDateTime horaInicio;
-
-  @Getter @Setter
-  @Column(name = "hora_fim")
-  private LocalDateTime horaFim;
 
   @Getter @Setter
   @Column(name = "solicita_material", nullable = false)
