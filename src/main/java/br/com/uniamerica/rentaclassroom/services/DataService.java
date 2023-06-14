@@ -13,10 +13,10 @@ public class DataService {
 
     @Transactional
     public void cadastraData(Data data){
-        if(data.getHoraInicio() == null){
+        if(data.getDataInicio() == null){
             throw new RuntimeException("o campo horaInicio não pode ser nulo");
         }
-        if(data.getHoraFim() == null){
+        if(data.getDataFim() == null){
             throw new RuntimeException("o campo horaFim não pode ser nulo");
         }
         this.dataRepository.save(data);

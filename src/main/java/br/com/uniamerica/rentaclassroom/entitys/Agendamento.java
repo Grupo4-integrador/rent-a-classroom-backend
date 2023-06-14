@@ -1,10 +1,9 @@
 package br.com.uniamerica.rentaclassroom.entitys;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.AuditTable;
@@ -18,8 +17,8 @@ public class Agendamento extends AbstractEntity {
 
   @Getter @Setter
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "professor", nullable = false)
-  private Professor professor;
+  @JoinColumn(name = "usuario", nullable = false)
+  private Usuario usuario;
 
   @Getter @Setter
   @ManyToOne(fetch = FetchType.EAGER)
@@ -27,7 +26,8 @@ public class Agendamento extends AbstractEntity {
   private Sala ambiente;
 
   @Getter @Setter
-  @Column(name = "data", nullable = false)
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tb_data", nullable = false)
   private Data data;
 
   @Getter @Setter

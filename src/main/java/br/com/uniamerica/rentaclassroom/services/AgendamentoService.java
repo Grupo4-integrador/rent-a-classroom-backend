@@ -2,7 +2,7 @@ package br.com.uniamerica.rentaclassroom.services;
 
 import br.com.uniamerica.rentaclassroom.entitys.Agendamento;
 import br.com.uniamerica.rentaclassroom.repositories.AgendamentoRepository;
-import br.com.uniamerica.rentaclassroom.repositories.ProfessorRepository;
+import br.com.uniamerica.rentaclassroom.repositories.UsuarioRepository;
 import br.com.uniamerica.rentaclassroom.repositories.SalaRepository;
 import br.com.uniamerica.rentaclassroom.repositories.SelecaoMaterialRepository;
 import jakarta.transaction.Transactional;
@@ -14,7 +14,7 @@ public class AgendamentoService {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
     @Autowired
-    private ProfessorRepository professorRepository;
+    private UsuarioRepository usuarioRepository;
     @Autowired
     private SalaRepository salaRepository;
     @Autowired
@@ -22,7 +22,7 @@ public class AgendamentoService {
 
     @Transactional
     public void cadastraAgendamento(Agendamento agendamento){
-        if(agendamento.getProfessor() == null){
+        if(agendamento.getUsuario() == null){
             throw new RuntimeException("o campo professor não pode ser nulo");
         }
         if(salaRepository.findById(agendamento.getAmbiente().getId()).isEmpty()){
@@ -47,12 +47,12 @@ public class AgendamentoService {
             throw new RuntimeException("registro não encontrado");
         }
         if(agendamento.getCadastro()==null || "".equals(agendamento.getCadastro())){
-            agendamentoBanco.setCadastro(professorRepository.findById(agendamento.getId()).get().getCadastro());
+            agendamentoBanco.setCadastro(usuarioRepository.findById(agendamento.getId()).get().getCadastro());
         }
-        if(professorRepository.findById(agendamento.getProfessor().getId()).isEmpty()){
+        if(usuarioRepository.findById(agendamento.getUsuario().getId()).isEmpty()){
             throw new RuntimeException("o id do professor inserido não existe");
         }
-        if(agendamento.getProfessor() == null){
+        if(agendamento.getUsuario() == null){
             throw new RuntimeException("o campo professor não pode ser nulo");
         }
         if(salaRepository.findById(agendamento.getAmbiente().getId()).isEmpty()){
