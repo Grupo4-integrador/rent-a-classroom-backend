@@ -13,19 +13,19 @@ import org.hibernate.envers.Audited;
 @AuditTable(value = "tb_usuario_audit", schema = "audit")
 public class Usuario extends AbstractEntity {
 
-  @Getter @Setter
-  @Column(name = "senha", unique = true)
-  private String senha;
+  @Getter
+  @Setter
+  @Column(name = "role", nullable = false)
+  private RoleUsuario role;
 
   @Getter
   @Setter
   @Column(name = "nome", nullable = false, length = 50)
   private String nome;
 
-  @Getter
-  @Setter
-  @Column(name = "role", nullable = false)
-  private RoleUsuario role;
+  @Getter @Setter
+  @Column(name = "senha", unique = true)
+  private String senha;
 
   @Getter
   @Setter

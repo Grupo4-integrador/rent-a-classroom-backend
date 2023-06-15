@@ -3,7 +3,6 @@ package br.com.uniamerica.rentaclassroom.services;
 import br.com.uniamerica.rentaclassroom.entitys.Turma;
 import br.com.uniamerica.rentaclassroom.repositories.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +16,14 @@ public class TurmaService {
         if(turmaRepository.findById(turma.getId()).get().getCurso().equals(turma.getCurso())){
             throw new RuntimeException("O campo curso ja existe (Campo unico)");
         }
-        if(turma.getCurso()==null){
-            throw new RuntimeException("O campo curso esta em branco");
+        if(turma.getCurso()==null || "".equals(turma.getCurso())){
+            throw new RuntimeException("o campo curso não pode ser nulo ou vazio");
         }
         if(turma.getCurso().length()>50 || turma.getCurso().length()<4){
-            throw new RuntimeException("O campo curso esta contem um tamanho ivalido");
+            throw new RuntimeException("o campo curso não condiz com a quantidade de caractéres necessárias (4 ~ 50)");
         }
         if(turma.getQuantAlunos()==0){
-            throw new RuntimeException("A quantidade de alunos esta invalida");
+            throw new RuntimeException("o campo quantAlunos não pode ser menor ou igual a zero");
         }
         this.turmaRepository.save(turma);
     }
@@ -35,22 +34,15 @@ public class TurmaService {
         if(turmaBanco.getId() == null || !turmaBanco.getId().equals(turma.getId())){
             throw new RuntimeException("Não foi possivel encontrar o registro informado");
         }
+        if(turma.getCurso() != turmaRepository.findById(turma.getId()).get().getCurso()){
+            throw new RuntimeException("o campo curso não pode ser alterado");
+        }
+        if(turma.getQuantAlunos()==0){
+            throw new RuntimeException("o campo quantAlunos não pode ser menor ou igual a zero");
+        }
         if(turma.getCadastro()==null || "".equals(turma.getCadastro())){
             turma.setCadastro(turmaRepository.findById(turma.getId()).get().getCadastro());
         }
-        if(turmaRepository.findById(turma.getId()).get().getCurso().equals(turma.getCurso())){
-            throw new RuntimeException("O campo curso ja existe (Campo unico)");
-        }
-        if(turma.getCurso()==null){
-            throw new RuntimeException("O campo curso esta em branco");
-        }
-        if(turma.getCurso().length()>50 || turma.getCurso().length()<4){
-            throw new RuntimeException("O campo curso esta contem um tamanho ivalido");
-        }
-        if(turma.getQuantAlunos()==0){
-            throw new RuntimeException("A quantidade de alunos esta invalida");
-        }
         this.turmaRepository.save(turma);
     }
-
 }

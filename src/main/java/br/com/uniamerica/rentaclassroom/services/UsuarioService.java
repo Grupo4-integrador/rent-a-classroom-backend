@@ -16,25 +16,27 @@ public class UsuarioService {
 
     @Transactional
     public void cadastraUsuario(Usuario usuario){
-        if(usuario.getSenha()==null){
-            throw new RuntimeException("A senha do usuario está vazio");
-        }
         /*if(this.usuarioRepository.findById(usuario.getId()).get().getSenha().equals(usuario.getSenha())){
             throw new RuntimeException("Este RA ja existe");
         }*/
-        if(usuario.getNome()==null){
-            throw new RuntimeException("O nome do usuario está vazio");
+        if(usuario.getRole()==null){
+            throw new RuntimeException("o campo role não pode ser nulo");
+        }
+        if(usuario.getNome()==null || "".equals(usuario.getNome())){
+            throw new RuntimeException("o campo nome não pode ser nulo ou vazio");
         }
         if(usuario.getNome().length()>50 || usuario.getNome().length()<4){
-            throw new RuntimeException("O tamanho do nome do usuario esta invalido");
+            throw new RuntimeException("o campo nome não condiz com a quantidade de caractéres necessárias (4 ~ 50)");
         }
-        if(this.verificaMascara.email(usuario.getEmail())==false){
-            throw new RuntimeException("O email está invalido");
+        if(usuario.getSenha()==null || "".equals(usuario.getSenha())){
+            throw new RuntimeException("o campo senha não pode ser nulo ou vazio");
+        }
+        if(!this.verificaMascara.email(usuario.getEmail())){
+            throw new RuntimeException("o campo email não é válido");
         }
         if(usuario.getTurmas()==null){
-            throw new RuntimeException("A(s) turma(s) do usuario está(ão) vázio(as)");
+            throw new RuntimeException("o campo turma não pode ser nulo");
         }
-
         this.usuarioRepository.save(usuario);
     }
     public void atualizaUsuario(final Long id, Usuario usuario){
@@ -42,25 +44,24 @@ public class UsuarioService {
         if(usuarioBanco.getId()==null || usuarioBanco.getId().equals(usuario.getId())){
             throw new RuntimeException("Não foi possivel encontrar o registro");
         }
+        if(usuario.getRole() != usuarioRepository.findById(usuario.getId()).get().getRole()){
+            throw new RuntimeException("o campo role não pode ser alterado");
+        }
+        if(usuario.getNome() != usuarioRepository.findById(usuario.getId()).get().getNome()){
+            throw new RuntimeException("o campo nome não pode ser alterado");
+        }
+        if(usuario.getSenha()==null || "".equals(usuario.getSenha())){
+            throw new RuntimeException("o campo senha não pode ser nulo ou vazio");
+        }
+        if(!this.verificaMascara.email(usuario.getEmail())){
+            throw new RuntimeException("o campo email não é válido");
+        }
+        if(usuario.getTurmas()==null){
+            throw new RuntimeException("o campo turma não pode ser nulo");
+        }
         if(usuario.getCadastro()==null || "".equals(usuario.getCadastro())){
             usuario.setCadastro(usuarioRepository.findById(usuario.getId()).get().getCadastro());
         }
-        if(usuario.getSenha()==null){
-            throw new RuntimeException("A senha do usuario está vazio");
-        }
-        if(usuario.getNome()==null){
-            throw new RuntimeException("O nome do usuario está vazio");
-        }
-        if(usuario.getNome().length()>50 || usuario.getNome().length()<4){
-            throw new RuntimeException("O tamanho do nome do usuario esta invalido");
-        }
-        if(this.verificaMascara.email(usuario.getEmail())==false){
-            throw new RuntimeException("O email está invalido");
-        }
-        if(usuario.getTurmas()==null){
-            throw new RuntimeException("A(s) turma(s) do usuario está(ão) vázio(as)");
-        }
-
         this.usuarioRepository.save(usuario);
     }
 }

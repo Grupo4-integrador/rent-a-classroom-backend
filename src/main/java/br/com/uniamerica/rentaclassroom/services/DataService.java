@@ -29,15 +29,15 @@ public class DataService {
         if(dataBanco == null || !dataBanco.getId().equals(data.getId())){
             throw new RuntimeException("não foi possivel identificar o registro informado.");
         }
-        this.dataRepository.save(data);
-    }
-
-    @Transactional
-    public void deletaData(final Long id){
-        final Data dataBanco = this.dataRepository.findById(id).orElse(null);
-        if(dataBanco == null || !dataBanco.getId().equals(id)){
-            throw new RuntimeException("registro não encontrado");
+        if(data.getDataInicio() != dataRepository.findById(data.getId()).get().getDataInicio()){
+            throw new RuntimeException("o campo dataInicio não pode ser alterado");
         }
-        this.dataRepository.deleteById(id);
+        if(data.getDataFim() != dataRepository.findById(data.getId()).get().getDataFim()){
+            throw new RuntimeException("o campo dataFim não pode ser alterado");
+        }
+        if(data.getCadastro()==null || "".equals(data.getCadastro())){
+            data.setCadastro(dataRepository.findById(data.getId()).get().getCadastro());
+        }
+        this.dataRepository.save(data);
     }
 }

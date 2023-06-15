@@ -23,7 +23,7 @@ public class MaterialService {
         // Validação de unique: valida se o nome do material não existe não banco de dados antes de salva-lô.
         Material databaseMaterial = this.materialRepository.findByNome(material.getNome());
         Assert.isTrue(databaseMaterial == null || !databaseMaterial.getNome().equals(material.getNome()),
-                "Esse material já existe nos registros");
+                "esse material já existe nos registros");
 
         this.materialRepository.save(material);
     }
@@ -33,8 +33,8 @@ public class MaterialService {
     public void updateMaterial(final Long id, final Material material) {
         // Valida se o registro do material existe no banco de dados antes de atualiza-lô.
         Material databaseMaterial = this.materialRepository.findById(id).orElse(null);
-        if (databaseMaterial == null || !databaseMaterial.getId().equals(material.getId())) {
-            throw new RuntimeException("Registro não encontrado");
+        if(databaseMaterial == null || !databaseMaterial.getId().equals(material.getId())) {
+            throw new RuntimeException("registro não encontrado");
         }
         if(material.getCadastro()==null || "".equals(material.getCadastro())){
             material.setCadastro(materialRepository.findById(material.getId()).get().getCadastro());
@@ -44,24 +44,11 @@ public class MaterialService {
 
         // Validação de unique: valida se o nome do material não existe não banco de dados antes de atualiza-lô.
         databaseMaterial = this.materialRepository.findByNome(material.getNome());
-        if (databaseMaterial.getId() != material.getId()) {
+        if(databaseMaterial.getId() != material.getId()) {
             Assert.isTrue(!databaseMaterial.getNome().equals(material.getNome()),
-                    "Esse nome de material já existe nos registros");
+                    "o campo nome já existe");
         }
 
         this.materialRepository.save(material);
-    }
-
-    // Método que valida a existência de um material no banco de dados para poder exclui-lô.
-    @Transactional
-    public void deleteMaterial(final Long id) {
-
-        Material databaseMaterial = this.materialRepository.findById(id).orElse(null);
-
-        if (databaseMaterial == null || !databaseMaterial.getId().equals(id)) {
-            throw new RuntimeException("Registro não encontrado");
-        }
-
-        this.materialRepository.deleteById(id);
     }
 }

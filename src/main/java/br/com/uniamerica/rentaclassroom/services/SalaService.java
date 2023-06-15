@@ -14,20 +14,20 @@ public class SalaService {
 
     @Transactional
     public void cadastraSala(Sala sala){
-        if( "".equals(sala.getNome())){
-            throw new RuntimeException(" Deve inserir o nome da sala");
+        if(sala.getNome() == null || "".equals(sala.getNome())){
+            throw new RuntimeException("o campo nome não pode ser nulo ou vazio");
         }
-        if ( salaRepository.findByNome(sala.getNome()) != null){
-            throw new RuntimeException(" A sala que esta querendo inserir ja existe");
+        if(salaRepository.findByNome(sala.getNome()) != null){
+            throw new RuntimeException("o campo sala já existe");
         }
         if(sala.getNome().length()>50 || sala.getNome().length()<4){
-            throw new RuntimeException("O tamanho de nome esta incorreto");
+            throw new RuntimeException("o campo nome não condiz com a quantidade de caractéres necessárias (4 ~ 50)");
         }
-        if ( sala.getCapacidade() == 0 ){
-            throw new RuntimeException(" Deve inserir a capacidade da sala");
+        if(sala.getCapacidade() == 0){
+            throw new RuntimeException("o campo capacidade não pode ser nulo");
         }
-        if ( "".equals(sala.getAndar())){
-            throw new RuntimeException(" Deve inserir o andar");
+        if(sala.getAndar() == null){
+            throw new RuntimeException("o campo andar não pode ser nulo");
         }
         this.salaRepository.save(sala);
     }
@@ -39,19 +39,21 @@ public class SalaService {
         if(salaBanco == null || !salaBanco.getId().equals(sala.getId())){
             throw new RuntimeException("nao foi possivel identificar o registro informado.");
         }
-        if(sala.getCadastro()==null || "".equals(sala.getCadastro())){
+        if(sala.getNome() == null || "".equals(sala.getNome())){
+            throw new RuntimeException("o campo nome não pode ser nulo ou vazio");
+        }
+        if(sala.getNome().length()>50 || sala.getNome().length()<4){
+            throw new RuntimeException("o campo nome não condiz com a quantidade de caractéres necessárias (4 ~ 50)");
+        }
+        if(sala.getCapacidade() == 0){
+            throw new RuntimeException("o campo capacidade não pode ser nulo");
+        }
+        if(sala.getAndar() == null){
+            throw new RuntimeException("o campo andar não pode ser nulo");
+        }
+        if(sala.getCadastro()==null){
             sala.setCadastro(salaRepository.findById(sala.getId()).get().getCadastro());
-        }
-        if( "".equals(sala.getNome())){
-            throw new RuntimeException(" Deve inserir o nome da sala");
-        }
-        if ( sala.getCapacidade() == 0 ){
-            throw new RuntimeException(" Deve inserir a capacidade da sala");
-        }
-        if ( "".equals(sala.getAndar())){
-            throw new RuntimeException(" Deve inserir o andar");
         }
         this.salaRepository.save(sala);
     }
-
 }

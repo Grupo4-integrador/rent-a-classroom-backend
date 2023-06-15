@@ -27,24 +27,15 @@ public class SelecaoMaterialService {
         if(selecaoMaterialBanco == null || !selecaoMaterialBanco.getId().equals(selecaoMaterial.getId())){
             throw new RuntimeException("não foi possível identificar o registro informado");
         }
+        if(selecaoMaterial.getMaterial() != selecaoMaterialRepository.findById(selecaoMaterial.getId()).get().getMaterial()){
+            throw new RuntimeException("o campo material não pode ser alterado");
+        }
+        if(selecaoMaterial.getQuantidade() != selecaoMaterialRepository.findById(selecaoMaterial.getId()).get().getQuantidade()){
+            throw new RuntimeException("o campo quantidade não pode ser alterado");
+        }
         if(selecaoMaterial.getCadastro()==null || "".equals(selecaoMaterial.getCadastro())){
             selecaoMaterial.setCadastro(selecaoMaterialRepository.findById(selecaoMaterial.getId()).get().getCadastro());
         }
-        if(selecaoMaterial.getMaterial() == null){
-            throw new RuntimeException("o campo material não pode ser nulo");
-        }
-        if(selecaoMaterial.getQuantidade() <= 0){
-            throw new RuntimeException("o campo quantidade não pode ser menor ou igual a zero");
-        }
         this.selecaoMaterialRepository.save(selecaoMaterial);
-    }
-
-    @Transactional
-    public void deletaSelecaoMaterial(final Long id){
-        final SelecaoMaterial selecaoMaterialBanco = this.selecaoMaterialRepository.findById(id).orElse(null);
-        if(selecaoMaterialBanco == null || !selecaoMaterialBanco.getId().equals(id)){
-            throw new RuntimeException("registro não encontrado");
-        }
-        this.selecaoMaterialRepository.deleteById(id);
     }
 }
