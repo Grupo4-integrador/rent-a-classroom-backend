@@ -24,8 +24,8 @@ public class Usuario extends AbstractEntity {
 
   @Getter
   @Setter
-  @Column(name = "is-professor", nullable = false)
-  private boolean isProfessor;
+  @Column(name = "role", nullable = false)
+  private RoleUsuario role;
 
   @Getter
   @Setter
