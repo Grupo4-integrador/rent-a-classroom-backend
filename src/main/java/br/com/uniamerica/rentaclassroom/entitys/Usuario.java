@@ -9,14 +9,15 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Audited
-@Table(name = "tb_usuario", schema = "rentaclassroom")
-@AuditTable(value = "tb_usuario_audit", schema = "audit")
+@Table(name = "tb_usuarios", schema = "rentaclassroom")
+@AuditTable(value = "tb_usuarios_audit", schema = "audit")
 public class Usuario extends AbstractEntity {
 
-  @Getter
+  /*@Getter
   @Setter
-  @Column(name = "role", nullable = false)
-  private RoleUsuario role;
+  @Enumerated(EnumType.STRING)
+  @JoinColumn(name = "role", nullable = false)
+  private RoleUsuario role;*/
 
   @Getter
   @Setter
@@ -34,7 +35,7 @@ public class Usuario extends AbstractEntity {
 
   @Getter
   @Setter
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER)
   @JoinTable(
     name = "tb_usuario_turmas",
     schema = "rentaclassroom",

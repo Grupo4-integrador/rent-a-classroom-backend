@@ -3,6 +3,7 @@ package br.com.uniamerica.rentaclassroom.entitys;
 public enum RoleUsuario {
     USUARIO (1, "Usuario"),
     ADMIN (2, "Admin");
+
     public final int valorNumerico;
     public final String valorString;
 

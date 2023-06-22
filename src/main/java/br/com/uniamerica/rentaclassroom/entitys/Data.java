@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Audited
-@Table(name = "tb_data", schema = "rentaclassroom")
-@AuditTable(value = "tb_data_audit", schema = "audit")
+@Table(name = "tb_datas", schema = "rentaclassroom")
+@AuditTable(value = "tb_datas_audit", schema = "audit")
 public class Data extends AbstractEntity {
     @Getter @Setter
     @Column(name = "data_inicio", nullable = false)

@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/authenticator")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })public class AuthenticatorController {
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
+public class AuthenticatorController {
 
     private final UsuarioRepository usuarioRepository;
     public AuthenticatorController(UsuarioRepository usuarioRepository) {
