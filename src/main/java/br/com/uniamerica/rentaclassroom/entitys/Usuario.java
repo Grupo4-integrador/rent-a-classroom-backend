@@ -16,7 +16,7 @@ public class Usuario extends AbstractEntity {
   @Getter
   @Setter
   @Enumerated(EnumType.STRING)
-  @JoinColumn(name = "tb_role", nullable = false)
+  @JoinColumn(name = "role_usuario", nullable = false)
   private RoleUsuario roleUsuario;
 
   @Getter
