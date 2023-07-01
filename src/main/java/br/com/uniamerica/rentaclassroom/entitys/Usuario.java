@@ -13,11 +13,11 @@ import org.hibernate.envers.Audited;
 @AuditTable(value = "tb_usuarios_audit", schema = "audit")
 public class Usuario extends AbstractEntity {
 
-  /*@Getter
+  @Getter
   @Setter
   @Enumerated(EnumType.STRING)
   @JoinColumn(name = "role", nullable = false)
-  private RoleUsuario role;*/
+  private RoleUsuario role;
 
   @Getter
   @Setter

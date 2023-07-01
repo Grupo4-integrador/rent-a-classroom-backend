@@ -4,7 +4,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import br.com.uniamerica.rentaclassroom.entitys.Usuario;
 import br.com.uniamerica.rentaclassroom.repositories.UsuarioRepository;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/authenticator")
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 public class AuthenticatorController {
 
     private final UsuarioRepository usuarioRepository;
