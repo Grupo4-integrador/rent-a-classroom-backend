@@ -6,11 +6,10 @@ import br.com.uniamerica.rentaclassroom.services.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/data")
 public class DataController {
     @Autowired

@@ -1,7 +1,6 @@
 package br.com.uniamerica.rentaclassroom.controllers;
 
 import java.util.Map;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.uniamerica.rentaclassroom.entitys.Usuario;

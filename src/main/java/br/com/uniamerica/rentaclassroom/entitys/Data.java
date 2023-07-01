@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

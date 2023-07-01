@@ -54,6 +54,6 @@ public class Agendamento extends AbstractEntity {
 
   @Getter @Setter
   @Enumerated(EnumType.STRING)
-  @JoinColumn(name = "situacao")
+  @JoinColumn(name = "situacao", nullable = false)
   private Situacao situacao;
 }
