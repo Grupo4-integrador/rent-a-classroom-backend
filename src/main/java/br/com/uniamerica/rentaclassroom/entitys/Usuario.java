@@ -21,6 +21,11 @@ public class Usuario extends AbstractEntity {
 
   @Getter
   @Setter
+  @Column(name = "cor", nullable = false, length = 50)
+  private String cor;
+
+  @Getter
+  @Setter
   @Column(name = "nome", nullable = false, length = 50)
   private String nome;
 
