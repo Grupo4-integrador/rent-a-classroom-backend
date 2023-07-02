@@ -16,12 +16,15 @@ public class UsuarioService {
 
     @Transactional
     public void cadastraUsuario(Usuario usuario){
-        /*if(this.usuarioRepository.findById(usuario.getId()).get().getSenha().equals(usuario.getSenha())){
+        if(this.usuarioRepository.findById(usuario.getId()).get().getSenha().equals(usuario.getSenha())){
             throw new RuntimeException("Este RA ja existe");
-        }*/
-        /*if(usuario.getRole()==null){
+        }
+        if(usuario.getCor()==null){
+            throw new RuntimeException("o campo cor não pode ser nulo");
+        }
+        if(usuario.getRoleUsuario()==null){
             throw new RuntimeException("o campo role não pode ser nulo");
-        }*/
+        }
         if(usuario.getNome()==null || "".equals(usuario.getNome())){
             throw new RuntimeException("o campo nome não pode ser nulo ou vazio");
         }
@@ -44,9 +47,12 @@ public class UsuarioService {
         if(usuarioBanco.getId()==null || usuarioBanco.getId().equals(usuario.getId())){
             throw new RuntimeException("Não foi possivel encontrar o registro");
         }
-        /*if(usuario.getRole() != usuarioRepository.findById(usuario.getId()).get().getRole()){
+        if(usuario.getCor()==null){
+            throw new RuntimeException("o campo cor não pode ser nulo");
+        }
+        if(usuario.getRoleUsuario() != usuarioRepository.findById(usuario.getId()).get().getRoleUsuario()){
             throw new RuntimeException("o campo role não pode ser alterado");
-        }*/
+        }
         if(usuario.getNome() != usuarioRepository.findById(usuario.getId()).get().getNome()){
             throw new RuntimeException("o campo nome não pode ser alterado");
         }
