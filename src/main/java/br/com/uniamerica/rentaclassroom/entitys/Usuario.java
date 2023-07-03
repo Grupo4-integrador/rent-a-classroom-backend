@@ -30,7 +30,7 @@ public class Usuario extends AbstractEntity {
   private String nome;
 
   @Getter @Setter
-  @Column(name = "senha", unique = true)
+  @Column(name = "senha", unique = true, length = 50)
   private String senha;
 
   @Getter
