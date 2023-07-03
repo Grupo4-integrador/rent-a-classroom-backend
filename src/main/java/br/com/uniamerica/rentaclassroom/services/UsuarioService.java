@@ -22,9 +22,6 @@ public class UsuarioService {
         if(usuario.getCor()==null){
             throw new RuntimeException("o campo cor não pode ser nulo");
         }
-        if(usuario.getRoleUsuario()==null){
-            throw new RuntimeException("o campo role não pode ser nulo");
-        }
         if(usuario.getNome()==null || "".equals(usuario.getNome())){
             throw new RuntimeException("o campo nome não pode ser nulo ou vazio");
         }
@@ -49,9 +46,6 @@ public class UsuarioService {
         }
         if(usuario.getCor()==null){
             throw new RuntimeException("o campo cor não pode ser nulo");
-        }
-        if(usuario.getRoleUsuario() != usuarioRepository.findById(usuario.getId()).get().getRoleUsuario()){
-            throw new RuntimeException("o campo role não pode ser alterado");
         }
         if(usuario.getNome() != usuarioRepository.findById(usuario.getId()).get().getNome()){
             throw new RuntimeException("o campo nome não pode ser alterado");
