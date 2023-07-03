@@ -1,8 +1,8 @@
 package br.com.uniamerica.rentaclassroom.entitys;
 
 public enum Situacao {
-  DEFERIDO (3, "Deferido"),
-  INDEFERIDO (3, "Indeferido"),
+  DEFERIDO (1, "Deferido"),
+  INDEFERIDO (2, "Indeferido"),
   EM_AVALIACAO (3, "Em avaliação");
 
   public final int valorNumerico;
