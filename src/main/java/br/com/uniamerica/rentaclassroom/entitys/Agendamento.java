@@ -26,7 +26,7 @@ public class Agendamento extends AbstractEntity {
   private Sala ambiente;
 
   @Getter @Setter
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "tb_data", nullable = false)
   private Data data;
 

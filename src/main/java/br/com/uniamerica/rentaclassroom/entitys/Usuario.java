@@ -30,12 +30,12 @@ public class Usuario extends AbstractEntity {
   private String nome;
 
   @Getter @Setter
-  @Column(name = "senha", unique = true, length = 50)
+  @Column(name = "senha", nullable = false, length = 50)
   private String senha;
 
   @Getter
   @Setter
-  @Column(name = "email", unique = true, length = 100)
+  @Column(name = "email", unique = true, nullable = false, length = 100)
   private String email;
 
   @Getter

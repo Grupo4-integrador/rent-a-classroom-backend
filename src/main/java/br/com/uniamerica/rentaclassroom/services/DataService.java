@@ -29,12 +29,12 @@ public class DataService {
         if(dataBanco == null || !dataBanco.getId().equals(data.getId())){
             throw new RuntimeException("não foi possivel identificar o registro informado.");
         }
-        if(data.getDataInicio() != dataRepository.findById(data.getId()).get().getDataInicio()){
-            throw new RuntimeException("o campo dataInicio não pode ser alterado");
-        }
-        if(data.getDataFim() != dataRepository.findById(data.getId()).get().getDataFim()){
-            throw new RuntimeException("o campo dataFim não pode ser alterado");
-        }
+       // if(data.getDataInicio() != dataRepository.findById(data.getId()).get().getDataInicio()){
+         //   throw new RuntimeException("o campo dataInicio não pode ser alterado");
+        //}
+       // if(data.getDataFim() != dataRepository.findById(data.getId()).get().getDataFim()){
+         //   throw new RuntimeException("o campo dataFim não pode ser alterado");
+       // }
         if(data.getCadastro()==null || "".equals(data.getCadastro())){
             data.setCadastro(dataRepository.findById(data.getId()).get().getCadastro());
         }

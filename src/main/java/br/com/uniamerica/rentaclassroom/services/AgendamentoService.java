@@ -22,9 +22,9 @@ public class AgendamentoService {
 
     @Transactional
     public void cadastraAgendamento(Agendamento agendamento){
-        if(agendamentoRepository.findById(agendamento.getUsuario().getId()).isEmpty()){
-            throw new RuntimeException("o id do usuario inserido não existe");
-        }
+       // if(agendamentoRepository.findById(agendamento.getUsuario().getId()).isEmpty()){
+         //   throw new RuntimeException("o id do usuario inserido não existe");
+        //}
         if(agendamentoRepository.findById(agendamento.getAmbiente().getId()).isEmpty()){
             throw new RuntimeException("o id do ambiente inserido não existe");
         }
@@ -49,9 +49,9 @@ public class AgendamentoService {
         if(agendamentoBanco == null || !agendamentoBanco.getId().equals(agendamento.getId())){
             throw new RuntimeException("registro não encontrado");
         }
-        if(agendamento.getUsuario() != agendamentoRepository.findById(agendamento.getId()).get().getUsuario()){
-            throw new RuntimeException("o campo usuario não pode ser alterado");
-        }
+       // if(agendamento.getUsuario() != agendamentoRepository.findById(agendamento.getId()).get().getUsuario()){
+         //   throw new RuntimeException("o campo usuario não pode ser alterado");
+      //  }
         if(agendamento.getAmbiente() != agendamentoRepository.findById(agendamento.getId()).get().getAmbiente()){
             throw new RuntimeException("o campo ambiente não pode ser alterado");
         }

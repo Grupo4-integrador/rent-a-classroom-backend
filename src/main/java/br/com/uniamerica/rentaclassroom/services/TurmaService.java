@@ -13,9 +13,9 @@ public class TurmaService {
 
     @Transactional
     public void cadastraTurma(Turma turma){
-        if(turmaRepository.findById(turma.getId()).get().getCurso().equals(turma.getCurso())){
-            throw new RuntimeException("O campo curso ja existe (Campo unico)");
-        }
+      //  if(turmaRepository.findById(turma.getId()).get().getCurso().equals(turma.getCurso())){
+        //    throw new RuntimeException("O campo curso ja existe (Campo unico)");
+        //}
         if(turma.getCurso()==null || "".equals(turma.getCurso())){
             throw new RuntimeException("o campo curso não pode ser nulo ou vazio");
         }
@@ -31,12 +31,13 @@ public class TurmaService {
     @Transactional
     public void atualizaTurma(final Long id, Turma turma){
         final Turma turmaBanco = this.turmaRepository.findById(id).orElse(null);
-        if(turmaBanco.getId() == null || !turmaBanco.getId().equals(turma.getId())){
+
+        if(turmaBanco == null || !turmaBanco.getId().equals(turma.getId())){
             throw new RuntimeException("Não foi possivel encontrar o registro informado");
         }
-        if(turma.getCurso() != turmaRepository.findById(turma.getId()).get().getCurso()){
-            throw new RuntimeException("o campo curso não pode ser alterado");
-        }
+       // if(turma.getCurso() != turmaRepository.findById(turma.getId()).get().getCurso()){
+         //   throw new RuntimeException("o campo curso não pode ser alterado");
+        //}
         if(turma.getQuantAlunos()==0){
             throw new RuntimeException("o campo quantAlunos não pode ser menor ou igual a zero");
         }
